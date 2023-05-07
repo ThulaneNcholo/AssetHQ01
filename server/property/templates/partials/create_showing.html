@@ -1,0 +1,95 @@
+<!-- Button trigger modal -->
+<button
+  type="button"
+  class="btn btn-style"
+  data-bs-toggle="modal"
+  data-bs-target="#createshowing"
+>
+  <i class="bi bi-plus-circle-fill"></i> Create New Viewing
+</button>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="createshowing"
+  tabindex="-1"
+  aria-labelledby="createshowingLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createshowingLabel">Create Showing</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST">
+          {% csrf_token %}
+          <div class="mb-4">
+            <label for="showingDate" class="form-label">Showing Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="showingDate"
+              aria-describedby="datepicker"
+              name="showingDate"
+              placeholder="Showing Date"
+            />
+          </div>
+          <!-- end date picker  -->
+          <div class="mb-4">
+            <label for="time" class="form-label">Time</label>
+            <input
+              type="time"
+              class="form-control"
+              id="time"
+              aria-describedby="timepicker"
+              name="time"
+              placeholder="Time"
+            />
+          </div>
+          <!-- end time picker  -->
+          <div class="mb-4">
+            <label for="viewingFor" class="form-label">Viewing For ?</label>
+            <input
+              type="text"
+              class="form-control"
+              id="viewingFor"
+              aria-describedby="client"
+              name="viewingFor"
+              placeholder="Client Name"
+            />
+          </div>
+          <!-- end client name  -->
+          <div class="mb-4">
+            <label for="contact" class="form-label">Contact</label>
+            <input
+              type="number"
+              class="form-control"
+              id="contact"
+              aria-describedby="contact"
+              name="contact"
+              placeholder="Contact Number"
+            />
+          </div>
+          <!-- end client contact  -->
+          <center>
+            <button
+              type="submit"
+              name="save_showing"
+              class="btn btn-style py-3 my-4"
+              style="width: 80%; font-size: 16px"
+            >
+              create showing
+            </button>
+          </center>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

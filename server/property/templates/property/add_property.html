@@ -1,0 +1,330 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #775de2;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+
+  .save-container {
+    padding-top: 20px;
+    background-color: white;
+    padding-bottom: 50px;
+  }
+
+  .cancel-btn {
+    background-color: var(--background-color);
+    color: var(--primary-color);
+  }
+</style>
+
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  <div class="row">
+    <div class="col-12 col-md-12 col-lg-6 mb-4">
+      <!-- ======= General Information  ======= -->
+      <div class="mt-5 main-container p-3">
+        <h5 class="mb-4">General Information</h5>
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingInput"
+                placeholder="Property Name"
+                name="Property_Name"
+              />
+              <label for="floatingInput">Property Name</label>
+            </div>
+          </div>
+          <!-- end input item  -->
+          <div class="col-12 col-md-6">
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingInput"
+                placeholder="Bedrooms"
+                name="Bedrooms"
+              />
+              <label for="floatingInput">Bedrooms</label>
+            </div>
+          </div>
+          <!-- end input item  -->
+          <div class="col-12 col-md-6">
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingInput"
+                placeholder="Bathrooms"
+                name="Bathrooms"
+              />
+              <label for="floatingInput">Bathrooms</label>
+            </div>
+          </div>
+          <!-- end input item  -->
+          <div class="col-12 col-md-6">
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingInput"
+                placeholder="Garages"
+                name="Garages"
+              />
+              <label for="floatingInput">Garages</label>
+            </div>
+          </div>
+          <!-- end input item  -->
+          <div class="col-12 col-md-6">
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingInput"
+                placeholder="floor_size"
+                name="floor_size"
+              />
+              <label for="floatingInput">Floor Size</label>
+            </div>
+          </div>
+          <!-- end input item  -->
+          <div class="col-12 col-md-6">
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingInput"
+                placeholder="erf_size"
+                name="erf_size"
+              />
+              <label for="floatingInput">Erf Size</label>
+            </div>
+          </div>
+          <!-- end input item  -->
+          <div class="col-12 col-md-6">
+            <div class="mb-3">
+              <select
+                name="property_for"
+                class="form-select"
+                aria-label="Default select example"
+              >
+                <option selected>Property For</option>
+                {% for data in property_For %}
+                <option value="{{data.id}}">{{data.name}}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <!-- end input item  -->
+          <div class="col-12 col-md-6">
+            <div class="mb-3">
+              <select
+                name="property_type"
+                class="form-select"
+                aria-label="Default select example"
+              >
+                <option selected>Property type</option>
+                {% for data in property_type %}
+                <option value="{{data.id}}">{{data.name}}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <!-- end input item  -->
+          <div class="col-12 col-md-6">
+            <div class="mb-3">
+              <select
+                name="eletricity_type"
+                class="form-select"
+                aria-label="Default select example"
+              >
+                <option selected>Eletricity type</option>
+                {% for data in eletricity_type %}
+                <option value="{{data.id}}">{{data.name}}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <!-- end input item  -->
+
+          <div class="col-12">
+            <div class="mb-3">
+              <div class="form-floating">
+                <textarea
+                  class="form-control"
+                  placeholder="Leave a comment here"
+                  id="floatingTextarea2"
+                  style="height: 250px"
+                  name="description"
+                ></textarea>
+                <label for="floatingTextarea2">Description</label>
+              </div>
+            </div>
+          </div>
+          <!-- end input item  -->
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-12 col-lg-6 mb-4">
+      <!-- ======= Property Address  ======= -->
+      <div class="mt-5 main-container p-3">
+        <h5 class="mb-4">Property Address</h5>
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingInput"
+                placeholder="Street Address"
+                name="Street"
+              />
+              <label for="floatingInput">Street Address</label>
+            </div>
+          </div>
+          <!-- end input item  -->
+          <div class="col-12 col-md-6">
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingInput"
+                placeholder="Town"
+                name="town"
+              />
+              <label for="floatingInput">Town</label>
+            </div>
+          </div>
+          <!-- end input item  -->
+          <div class="col-12 col-md-6">
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingInput"
+                placeholder="City"
+                name="City"
+              />
+              <label for="floatingInput">City</label>
+            </div>
+          </div>
+          <!-- end input item  -->
+          <div class="col-12 col-md-6">
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingInput"
+                placeholder="Province"
+                name="Province"
+              />
+              <label for="floatingInput">Province</label>
+            </div>
+          </div>
+          <!-- end input item  -->
+          <div class="col-12 col-md-6">
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingInput"
+                placeholder="Postal Code"
+                name="postal_code"
+              />
+              <label for="floatingInput">Postal Code</label>
+            </div>
+          </div>
+          <!-- end input item  -->
+        </div>
+      </div>
+
+      <!-- ======= Property Images  ======= -->
+      <div class="mt-5 main-container p-3" style="margin-bottom: 120px">
+        <h5 class="mb-4">Images</h5>
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <p>Cover Image</p>
+            <div class="input-group mb-3">
+              <input
+                name="coverImage"
+                type="file"
+                class="form-control"
+                id="inputGroupFile02"
+              />
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <p>Image</p>
+            <div class="input-group mb-3">
+              <input
+                name="image1"
+                type="file"
+                class="form-control"
+                id="inputGroupFile02"
+              />
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <p>Image</p>
+            <div class="input-group mb-3">
+              <input
+                name="image2"
+                type="file"
+                class="form-control"
+                id="inputGroupFile02"
+              />
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <p>Image</p>
+            <div class="input-group mb-3">
+              <input
+                name="image3"
+                type="file"
+                class="form-control"
+                id="inputGroupFile02"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="save-container fixed-bottom fixed-margin">
+    <center>
+      <div class="row mx-0">
+        <div class="col">
+          <button class="fw-bold btn py-2 cancel-btn" style="width: 100%">
+            Cancel
+          </button>
+        </div>
+        <div class="col">
+          <button
+            type="submit"
+            name="add_property"
+            class="fw-bold btn btn-style py-2"
+            style="width: 100%"
+          >
+            Save Property
+          </button>
+        </div>
+      </div>
+    </center>
+  </div>
+</form>
+
+<div class="space"></div>
+{% endblock %}
+

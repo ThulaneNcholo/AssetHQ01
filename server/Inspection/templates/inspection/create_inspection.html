@@ -1,0 +1,170 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #775de2;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+
+  .inspection-image {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 30px;
+  }
+
+  .inspection-cover {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+
+  .styled-checkbox {
+    background-color: var(--background-color);
+    border-radius: 10px;
+  }
+
+  .checkbox-styling {
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+  }
+
+  .secondary-manager-images {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: lightgray;
+    margin-right: 10px;
+    border: 2px solid;
+    border-color: var(--primary-color);
+  }
+
+  .secondary-card-style {
+    background-color: var(--background-color);
+    border-radius: 10px;
+  }
+
+  /* inspection btn  */
+  .inspection-btn {
+    background-color: var(--background-color);
+    border-radius: 5px;
+    height: 200px;
+    width: 150px;
+  }
+
+  .inspection-btn:hover {
+    background-color: var(--primary-color);
+    color: white !important;
+    cursor: pointer;
+  }
+
+  .inspection-icon {
+    font-size: 30px;
+    color: black;
+  }
+
+  /* tabs  */
+  .inspection-tabs {
+    margin-right: 10px;
+  }
+
+  .inspection-detail-images {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+  }
+</style>
+
+<button class="border-0 back-btn-bg" onclick="history.back()">
+  <i class="bi bi-arrow-left-square-fill back-btn"></i>
+</button>
+
+<!-- ======= Messages Notification  ======= -->
+<div>
+  {% for message in messages %}
+  <div class="alert alert-primary my-5" role="alert">{{message}}</div>
+  {% endfor %}
+</div>
+
+<div class="row">
+  <div class="col">
+    <h3>Inspection for</h3>
+  </div>
+  <div class="col">
+    <h3>{{inspection.property.propertyName}}</h3>
+  </div>
+</div>
+
+<!-- ==================== Tab buttons partial ================================= -->
+{% include 'partials/inspection_action.html' %}
+
+<!-- ==================== Inspector card ================================= -->
+<div class="main-container border mb-4 p-2 d-flex mt-5">
+  <img
+    class="inspection-image"
+    src="{{inspection.inspector.profile_pic.url}}"
+    alt=""
+  />
+  <div class="d-flex align-items-center">
+    <div>
+      <h6 class="mb-1 fw-bold">
+        {{inspection.inspector.first_name}} {{inspection.inspector.last_name}}
+      </h6>
+      <p class="mb-0 text-secondary">Inspector</p>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Create Inspection ================================= -->
+<h4 class="mt-5">Property Inspections</h4>
+
+{% for data in room_inspections %}
+<div class="mt-5 main-container border p-3">
+  <p><span class="fw-bold">Room</span> : {{ data.name }}</p>
+  <!-- items start  -->
+  {% for item in inspection_items %}
+  <!-- divider  -->
+  {% if item.room.id == data.id %}
+  <p><span class="fw-bold">Item</span> : {{ item.name }}</p>
+  <p><span class="fw-bold">Item description</span> : {{ item.description }}</p>
+
+  <p><span class="fw-bold">Comments</span> : {{ data.comments }}</p>
+
+  <!-- images start  -->
+  {% for image in inspection_images %}
+  <!-- divider  -->
+  {% if image.item.id == item.id%}
+
+  <!-- divider check if image  -->
+  {% if image.image1 %}
+  <img src="{{image.image1.url}}" alt="" class="inspection-detail-images" />
+  {% endif %}
+  <!-- divider check if image end -->
+  {% endif %}
+  <!-- divider  -->
+  {% endfor %} {% endif %}
+  <!-- divider  -->
+  {% endfor %}
+
+  <!-- delete inspection  -->
+  <div class="d-flex justify-content-end my-3">
+    <button class="btn btn-style">
+      <i class="bi bi-trash3-fill text-white"></i> Delete Inspection
+    </button>
+  </div>
+</div>
+{% endfor %}
+
+<div class="bottom-space"></div>
+{% endblock %}

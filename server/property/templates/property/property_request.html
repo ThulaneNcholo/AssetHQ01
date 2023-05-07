@@ -1,0 +1,78 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #775de2;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+
+  .inspection-image {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 30px;
+  }
+
+  .file-icon {
+    font-size: 30px;
+  }
+
+  .btn-margin-space {
+    margin-right: 15px;
+  }
+
+  .file-container {
+    height: 300px;
+  }
+
+  .more-link {
+    color: var(--primary-color);
+  }
+
+  .maintenance-card {
+    height: 350px;
+    max-height: 350px;
+  }
+
+  .outline-btns {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+  }
+
+  /* scroll effect start  */
+  .button-container {
+    width: 100%;
+    overflow: auto;
+    white-space: nowrap;
+  }
+
+  .btn-group {
+    display: inline-block;
+  }
+
+  .btn {
+    margin-right: 5px;
+  }
+</style>
+
+<!-- ======= Property Hero Component  ======= -->
+{% include 'partials/actions.html' %}
+
+<!-- select property partial modal  -->
+<div class="mb-4">{% include 'partials/properties_request_modal.html' %}</div>
+
+<!-- ======== Files list start ========= -->
+{% include 'partials/maintenance_request_partial.html' %}
+
+<div class="bottom-space"></div>
+{% endblock %}
+
+

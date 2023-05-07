@@ -1,0 +1,54 @@
+<!-- Button trigger modal -->
+<button
+  type="button"
+  class="btn btn-style"
+  data-bs-toggle="modal"
+  data-bs-target="#selectPropertyfiles"
+>
+  <i class="bi bi-folder-symlink-fill mx-1"></i> add property files
+</button>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="selectPropertyfiles"
+  tabindex="-1"
+  aria-labelledby="selectPropertyfilesLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="selectPropertyfilesLabel">
+          Select Property
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        {% for data in properties %}
+        <div class="main-container mb-4 p-2 d-flex">
+          <img class="inspection-image" src="{{data.coverImage.url}}" alt="" />
+          <div>
+            <p class="mb-0">
+              {{data.propertyName}} || {{data.property_type.name}}
+            </p>
+            <p class="mb-0">
+              {{data.street}} Street, {{data.town}} , {{data.city}} ,
+              {{data.province}}
+            </p>
+            <p class="mb-2">#{{data.listing_number}}</p>
+            <a href="{% url 'property-file-form' data.id %}">
+              <button class="btn btn-style">select</button>
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

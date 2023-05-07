@@ -1,0 +1,198 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #775de2;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+
+  .table-headings {
+    background-color: var(--background-color);
+  }
+
+  .table-row {
+    background-color: var(--secondary-background);
+  }
+
+  .grand-total {
+    background-color: var(--secondary-background);
+  }
+</style>
+
+<!-- ======= Property Hero Component  ======= -->
+{% include 'partials/actions.html' %}
+
+<div class="mb-5">{% include 'partials/create_showing.html' %}</div>
+
+<div class="row table-headings mx-0">
+  <div class="col p-2 border border-2 d-none d-lg-block">
+    <h6>Clinet</h6>
+  </div>
+  <div class="col p-2 border border-2">
+    <h6>Date</h6>
+  </div>
+  <div class="col p-2 border border-2 d-none d-lg-block">
+    <h6>Time</h6>
+  </div>
+  <div class="col p-2 border border-2">
+    <h6>Status</h6>
+  </div>
+  <div class="col p-2 border border-2">
+    <h6>Edit</h6>
+  </div>
+</div>
+
+{% for data in viewingsData %}
+<div class="row table-row mx-0 bg-white">
+  <div class="col p-2 border border-2 d-none d-lg-block">
+    <h6>{{data.client}}</h6>
+    <p class="mb-0">{{data.contact}}</p>
+  </div>
+  <div class="col p-2 border border-2">
+    <h6>{{data.viewing_date}}</h6>
+  </div>
+  <div class="col p-2 border border-2 d-none d-lg-block">
+    <h6>{{data.viewing_time}}</h6>
+  </div>
+  <div class="col p-2 border border-2">
+    <h6>{{data.status}}</h6>
+  </div>
+  <div class="col p-2 border border-2">
+    <button
+      class="btn btn-style"
+      data-bs-toggle="modal"
+      data-bs-target="#editViewing{{data.id}}"
+    >
+      Edit
+    </button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="editViewing{{data.id}}"
+  tabindex="-1"
+  aria-labelledby="editViewingLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editViewingLabel">Update Viewing</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST">
+          {% csrf_token %}
+          <div class="mb-4">
+            <label for="showingDate" class="form-label"
+              >Showing Date : {{data.viewing_date}}</label
+            >
+            <input
+              type="date"
+              class="form-control py-3"
+              id="showingDate"
+              aria-describedby="datepicker"
+              name="showingDate"
+              placeholder="Showing Date"
+              value="{{data.viewing_date}}"
+            />
+          </div>
+          <!-- end date picker  -->
+          <div class="mb-4">
+            <label for="time" class="form-label">Time</label>
+            <input
+              type="time"
+              class="form-control py-3"
+              id="time"
+              aria-describedby="timepicker"
+              name="time"
+              placeholder="Time"
+              value="{{data.viewing_time}}"
+            />
+          </div>
+          <!-- end time picker  -->
+          <div class="mb-4">
+            <input
+              type="text"
+              class="form-control py-3"
+              id="viewingFor"
+              aria-describedby="client"
+              name="viewingFor"
+              placeholder="Client Name"
+              value="{{data.client}}"
+            />
+          </div>
+          <!-- end client name  -->
+          <div class="mb-4">
+            <input
+              type="number"
+              class="form-control py-3"
+              id="contact"
+              aria-describedby="contact"
+              name="contact"
+              placeholder="Contact Number"
+              value="{{data.contact}}"
+            />
+          </div>
+          <!-- end client contact  -->
+
+          <select
+            class="form-select mb-4 form-control py-3"
+            aria-label="Default select example"
+            name="viewingStatus"
+          >
+            <option selected>{{data.status}}</option>
+            <option value="Pending">Pending</option>
+            <option value="Complete">Complete</option>
+            <option value="Canceled">Canceled</option>
+            <option value="Rescheduled">Rescheduled</option>
+          </select>
+          <!-- end status update  -->
+
+          <input
+            type="text"
+            value="{{data.id}}"
+            name="viewingID"
+            hidden="true"
+          />
+          <center>
+            <button
+              type="submit"
+              name="save_update"
+              class="btn btn-style py-3 mt-4 mb-3"
+              style="width: 80%; font-size: 16px"
+            >
+              save update
+            </button>
+            <button
+              class="btn btn-danger py-3 mb-3"
+              name="delete_viewing"
+              type="submit"
+              style="width: 80%; font-size: 16px"
+            >
+              Delete Viewing
+            </button>
+          </center>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+<div class="bottom-space"></div>
+{% endblock %}

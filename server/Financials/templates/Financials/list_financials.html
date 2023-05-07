@@ -1,0 +1,40 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #775de2;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+
+  .financial-icons {
+    font-size: 30px;
+    background-color: var(--background-color);
+  }
+
+  .total-row {
+    background-color: var(--primary-color);
+    color: lightgray;
+  }
+</style>
+
+<div class="row">
+  <div class="col">
+    <h3>Financials Page</h3>
+  </div>
+  <div class="col d-flex justify-content-end">
+    {% include 'partials/add_financial_modal.html' %}
+  </div>
+</div>
+
+<!-- List Finances Partial Data   -->
+<div class="mt-5">{% include 'partials/financials_data_partial.html' %}</div>
+
+<div class="bottom-space"></div>
+{% endblock %}

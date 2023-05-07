@@ -1,0 +1,39 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #775de2;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+
+  .inspection-image {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 30px;
+  }
+
+  .list-inspection-icon {
+    font-size: 40px;
+    color: var(--primary-color);
+  }
+</style>
+
+<h1>Inspections</h1>
+
+{% include 'partials/select_property.html' %}
+
+<div class="mt-5">
+  <!-- ==================== Properties inspection start ================================= -->
+  {% include 'partials/list_inspections_partials.html' %}
+</div>
+
+<div class="bottom-space"></div>
+{% endblock %}

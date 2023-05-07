@@ -1,0 +1,32 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #775de2;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+
+  .table-headings {
+    background-color: var(--background-color);
+  }
+
+  .grand-total {
+    background-color: var(--secondary-background);
+  }
+</style>
+
+<h3>Property Financials</h3>
+
+<div class="my-5 main-container p-3">
+  {% include 'partials/property_fianancials_details.html' %}
+</div>
+
+<div class="bottom-space"></div>
+{% endblock %}

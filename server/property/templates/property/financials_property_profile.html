@@ -1,0 +1,47 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #775de2;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+
+  .inspection-image {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 30px;
+  }
+
+  .list-inspection-icon {
+    font-size: 40px;
+    color: var(--primary-color);
+  }
+
+  .table-headings {
+    background-color: var(--background-color);
+  }
+
+  .grand-total {
+    background-color: var(--secondary-background);
+  }
+</style>
+
+<!-- ======= Property Hero Component  ======= -->
+{% include 'partials/actions.html' %}
+
+<!-- ==================== Property Financials ================================= -->
+<div class="main-container p-3">
+  {% include 'partials/property_fianancials_details.html' %}
+</div>
+
+<div class="bottom-space"></div>
+{% endblock %}

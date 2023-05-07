@@ -1,0 +1,24 @@
+{% for data in inspections %}
+<div class="main-container border mb-4 p-2 d-flex">
+  <img class="inspection-image" src="{{data.property.coverImage.url}}" alt="" />
+  <div>
+    <p class="mb-0">
+      {{data.property.propertyName}} / {{data.property.property_type.name}}
+    </p>
+    <p class="mb-0">#{{data.inspection_number}}</p>
+    <p class="mb-3">{{data.date}}</p>
+    <a href="{% url 'create-inspections' data.id %}">
+      <button class="btn btn-style rounded-pill" style="font-size: 14px">
+        view
+      </button>
+    </a>
+  </div>
+</div>
+{% empty %}
+<div>
+  <center>
+    <i class="bi bi-list-ul list-inspection-icon"></i>
+    <h6>There are currently no inspections made.</h6>
+  </center>
+</div>
+{% endfor%}

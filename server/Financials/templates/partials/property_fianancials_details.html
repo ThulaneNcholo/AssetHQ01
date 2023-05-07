@@ -1,0 +1,160 @@
+{% if propertyExpenses %}
+<!-- ================================== Expenses ============================= -->
+<!-- ======= Table Headings ======= -->
+<div class="row table-headings">
+  <div class="col p-3 border border-2 d-none d-lg-block">
+    <h6 class="fw-bold">Expenses</h6>
+  </div>
+  <div class="col p-3 border border-2">
+    <h6>Name</h6>
+  </div>
+  <div class="col p-3 border border-2 d-none d-lg-block">
+    <h6>Date</h6>
+  </div>
+  <div class="col p-3 border border-2">
+    <h6>Amount</h6>
+  </div>
+</div>
+<!-- ======= Table Data ======= -->
+{% for data in propertyExpenses %}
+<div class="row">
+  <div class="col p-3 border border-2 d-none d-lg-block">
+    <h6>{{forloop.counter}}</h6>
+  </div>
+  <div class="col p-3 border border-2">
+    <h6>{{data.name}}</h6>
+  </div>
+  <div class="col p-3 border border-2 d-none d-lg-block">
+    <h6>{{data.date_created}}</h6>
+  </div>
+  <div class="col p-3 border border-2 d-flex justify-content-end">
+    <h6>R{{data.amount}}</h6>
+  </div>
+</div>
+{% endfor %}
+<div class="row border border-2 grand-total">
+  <div class="col p-3">
+    <h6 class="fw-bold text-secondary">Total Exepenses</h6>
+  </div>
+  <div class="col p-3 d-none d-lg-block"></div>
+  <div class="col p-3 d-none d-lg-block"></div>
+  <div class="col p-3 d-flex justify-content-end">
+    <h6 class="fw-bold">R{{total_expense}}</h6>
+  </div>
+</div>
+{% endif %}
+
+<!-- divider  -->
+{% if propertyIncome %}
+<!-- ================================== Income ============================= -->
+<!-- ======= Table Headings ======= -->
+<div class="row table-headings">
+  <div class="col p-3 border border-2 d-none d-lg-block">
+    <h6 class="fw-bold">Income</h6>
+  </div>
+  <div class="col p-3 border border-2">
+    <h6>Name</h6>
+  </div>
+  <div class="col p-3 border border-2 d-none d-lg-block">
+    <h6>Date</h6>
+  </div>
+  <div class="col p-3 border border-2">
+    <h6>Amount</h6>
+  </div>
+</div>
+<!-- ======= Table Data ======= -->
+{% for data in propertyIncome %}
+<div class="row">
+  <div class="col p-3 border border-2 d-none d-lg-block">
+    <h6>{{forloop.counter}}</h6>
+  </div>
+  <div class="col p-3 border border-2">
+    <h6>{{data.name}}</h6>
+  </div>
+  <div class="col p-3 border border-2 d-none d-lg-block">
+    <h6>{{data.date_created}}</h6>
+  </div>
+  <div class="col p-3 border border-2 d-flex justify-content-end">
+    <h6>R{{data.amount}}</h6>
+  </div>
+</div>
+{% endfor %}
+<div class="row border border-2 grand-total">
+  <div class="col p-3">
+    <h6 class="fw-bold text-secondary">Total Income</h6>
+  </div>
+  <div class="col p-3 d-none d-lg-block"></div>
+  <div class="col p-3 d-none d-lg-block"></div>
+  <div class="col p-3 d-flex justify-content-end">
+    <h6 class="fw-bold">R{{total_income}}</h6>
+  </div>
+</div>
+{% endif %}
+
+<!-- divider  -->
+{% if propertyRent %}
+<!-- ================================== Income ============================= -->
+<!-- ======= Table Headings ======= -->
+<div class="row table-headings">
+  <div class="col p-3 border border-2 d-none d-lg-block">
+    <h6 class="fw-bold">Rent</h6>
+  </div>
+  <div class="col p-3 border border-2">
+    <h6>Name</h6>
+  </div>
+  <div class="col p-3 border border-2 d-none d-lg-block">
+    <h6>Date</h6>
+  </div>
+  <div class="col p-3 border border-2">
+    <h6>Amount</h6>
+  </div>
+</div>
+<!-- ======= Table Data ======= -->
+{% for data in propertyRent %}
+<div class="row">
+  <div class="col p-3 border border-2 d-none d-lg-block">
+    <h6>{{forloop.counter}}</h6>
+  </div>
+  <div class="col p-3 border border-2">
+    <h6>{{data.name}}</h6>
+    <p class="mb-0" style="font-size: 13px">
+      Tenant : {{data.tenant.first_name}} {{data.tenant.last_name}}
+    </p>
+  </div>
+  <div class="col p-3 border border-2 d-none d-lg-block">
+    <h6>{{data.date_created}}</h6>
+  </div>
+  <div class="col p-3 border border-2 d-flex justify-content-end">
+    <h6>R{{data.amount}}</h6>
+  </div>
+</div>
+{% endfor %}
+<div class="row border border-2 grand-total">
+  <div class="col p-3">
+    <h6 class="fw-bold text-secondary">Total Rent</h6>
+  </div>
+  <div class="col p-3 d-none d-lg-block"></div>
+  <div class="col p-3 d-none d-lg-block"></div>
+  <div class="col p-3 d-flex justify-content-end">
+    <h6 class="fw-bold">R{{total_rent}}</h6>
+  </div>
+</div>
+{% endif %}
+
+<!-- grand total  -->
+{% if grand_total %}
+<div class="row grand-total border border-2">
+  <div class="col p-3">
+    <h6 class="fw-bold">Grand Total</h6>
+  </div>
+  <div class="col p-3 d-none d-lg-block"></div>
+  <div class="col p-3 d-none d-lg-block"></div>
+  <div class="col p-3 d-flex justify-content-end">
+    {% if grand_total < 0 %}
+    <h6 class="fw-bold text-danger">R{{grand_total}}</h6>
+    {% else %}
+    <h6 class="fw-bold">R{{grand_total}}</h6>
+    {% endif %}
+  </div>
+</div>
+{% endif %}

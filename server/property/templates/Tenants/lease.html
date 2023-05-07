@@ -1,0 +1,315 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #775de2;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+
+  .lease-container {
+    width: 720px;
+  }
+
+  .date-card {
+    background-color: var(--background-color);
+    border-radius: 0.25rem;
+  }
+</style>
+
+<h3>Lease Agreement</h3>
+
+<div class="d-flex justify-content-center">
+  <div class="main-container p-3 lease-container">
+    <form method="POST">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-12 col-md-6">
+          {% if edit == 'editlease' %}
+          <div class="form-floating mb-4">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Applicant"
+              value="{{property_tenant.tenant.first_name}} {{property_tenant.tenant.last_name}}"
+              readonly
+            />
+            <label for="floatingInput">Applicant</label>
+          </div>
+          {% else %}
+          <div class="form-floating mb-4">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Applicant"
+              value="{{applicant_profile.first_name}} {{applicant_profile.last_name}}"
+              readonly
+            />
+            <label for="floatingInput">Applicant</label>
+          </div>
+          {% endif %}
+        </div>
+        <!-- end input item  -->
+        <div class="col-12 col-md-6">
+          <div class="form-floating mb-4">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Property Name"
+              name="Property_Name"
+              value="{{propertyProfile.propertyName}}"
+              readonly
+            />
+            <label for="floatingInput">Property Name</label>
+          </div>
+        </div>
+        {% if edit == 'editlease' %}
+        <!-- end input item  -->
+        <div class="col-12 col-md-6">
+          <div class="mb-4 p-2 date-card">
+            <p class="mb-0 text-secondary">Start Date</p>
+            <h6>{{property_tenant.start_date}}</h6>
+          </div>
+        </div>
+        <!-- end input item  -->
+        <div class="col-12 col-md-6">
+          <div class="mb-4 p-2 date-card">
+            <p class="mb-0 text-secondary">End Date</p>
+            <h6>{{property_tenant.end_date}}</h6>
+          </div>
+        </div>
+        <!-- end input item  -->
+        {% endif %}
+        <div class="col-12 col-md-6">
+          <div class="form-floating mb-4">
+            <input
+              type="date"
+              class="form-control"
+              id="floatingInput"
+              placeholder="New start Date"
+              name="start_date"
+            />
+            <label for="floatingInput">New start Date</label>
+          </div>
+        </div>
+        <!-- end input item  -->
+        <div class="col-12 col-md-6">
+          <div class="form-floating mb-4">
+            <input
+              type="date"
+              class="form-control"
+              id="floatingInput"
+              placeholder="End Date"
+              name="end_date"
+            />
+            <label for="floatingInput">New end Date</label>
+          </div>
+        </div>
+        <!-- end input item  -->
+        <div class="col-12 col-md-6">
+          <div class="form-floating mb-4">
+            <input
+              type="number"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Rent Amount"
+              name="rent_amount"
+              value="{{property_tenant.rent_amount}}"
+            />
+            <label for="floatingInput">Rent Amount</label>
+          </div>
+        </div>
+        <!-- end input item  -->
+        <div class="col-12 col-md-6">
+          <div class="form-floating mb-4">
+            <input
+              type="number"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Late Fee"
+              name="late_fee"
+              value="{{property_tenant.late_fee}}"
+            />
+            <label for="floatingInput">Late Fee</label>
+          </div>
+        </div>
+        <!-- end input item  -->
+        <div class="col-12 col-md-6">
+          <div class="form-floating mb-4">
+            <input
+              type="number"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Security Deposit"
+              name="security_deposit"
+              value="{{property_tenant.security_deposit}}"
+            />
+            <label for="floatingInput">Security Deposit</label>
+          </div>
+        </div>
+        <!-- end input item  -->
+        <div class="col-12 col-md-6">
+          <div class="form-floating mb-5">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Payment Schedule"
+              name="payment_schedule"
+              value="{{property_tenant.payment_schedule}}"
+            />
+            <label for="floatingInput">Payment Schedule</label>
+          </div>
+        </div>
+        <!-- end input item  -->
+        <div class="col-12">
+          <div class="mb-4">
+            <div class="form-floating">
+              <textarea
+                class="form-control"
+                placeholder="Leave a comment here"
+                id="floatingTextarea2"
+                style="height: 200px"
+                name="late_payment_policiy"
+                value="{{property_tenant.late_payment_policiy}}"
+              >
+{% if property_tenant.late_payment_policiy %}{{property_tenant.late_payment_policiy}}{% endif %}  
+            </textarea
+              >
+              <label for="floatingTextarea2">Late Payment Policy</label>
+            </div>
+          </div>
+        </div>
+        <!-- end input item  -->
+        <div class="col-12">
+          <div class="mb-4">
+            <div class="form-floating">
+              <textarea
+                class="form-control"
+                placeholder="Leave a comment here"
+                id="floatingTextarea2"
+                style="height: 200px"
+                name="utilities"
+              >
+{% if property_tenant.utilities %}{{property_tenant.utilities}}{% endif %}  
+            </textarea
+              >
+              <label for="floatingTextarea2">Utilities</label>
+            </div>
+          </div>
+        </div>
+        <!-- end input item  -->
+        <div class="col-12">
+          <div class="mb-4">
+            <div class="form-floating">
+              <textarea
+                class="form-control"
+                placeholder="Leave a comment here"
+                id="floatingTextarea2"
+                style="height: 200px"
+                name="maintenance_responsibilities"
+              >
+{% if property_tenant.maintenance_responsibilities %}{{property_tenant.maintenance_responsibilities}}{% endif %}
+            </textarea
+              >
+              <label for="floatingTextarea2"
+                >Maintenance Responsibilities</label
+              >
+            </div>
+          </div>
+        </div>
+        <!-- end input item  -->
+        <!-- end input item  -->
+        <div class="col-12">
+          <div class="mb-4">
+            <div class="form-floating">
+              <textarea
+                class="form-control"
+                placeholder="Leave a comment here"
+                id="floatingTextarea2"
+                style="height: 200px"
+                name="renewal_options"
+              >
+{% if property_tenant.renewal_options %}{{property_tenant.renewal_options}}{% endif %} 
+            </textarea
+              >
+              <label for="floatingTextarea2">Renewal Options</label>
+            </div>
+          </div>
+        </div>
+        <!-- end input item  -->
+        <div class="col-12">
+          <div class="mb-4">
+            <div class="form-floating">
+              <textarea
+                class="form-control"
+                placeholder="Leave a comment here"
+                id="floatingTextarea2"
+                style="height: 200px"
+                name="subletting_policy"
+              >
+{% if property_tenant.subletting_policy %}{{property_tenant.subletting_policy}}{% endif %} 
+            </textarea
+              >
+              <label for="floatingTextarea2">Subletting Policy</label>
+            </div>
+          </div>
+        </div>
+        <!-- end input item  -->
+        <div class="col-12">
+          <div class="mb-4">
+            <div class="form-floating">
+              <textarea
+                class="form-control"
+                placeholder="Leave a comment here"
+                id="floatingTextarea2"
+                style="height: 200px"
+                name="pet_policy"
+              >
+{% if property_tenant.pet_policy %}{{property_tenant.pet_policy}}{% endif %} 
+            </textarea
+              >
+              <label for="floatingTextarea2">Pet Policy</label>
+            </div>
+          </div>
+        </div>
+        <!-- end input item  -->
+      </div>
+
+      {% if edit == 'editlease' %}
+      <center>
+        <button
+          type="submit"
+          name="edit_lease"
+          class="btn btn-style py-3"
+          style="width: 70%; font-size: 16px"
+        >
+          edit lease agreement
+        </button>
+      </center>
+      {% else %}
+      <center>
+        <button
+          type="submit"
+          name="create_lease"
+          class="btn btn-style py-3"
+          style="width: 70%; font-size: 16px"
+        >
+          create lease agreement
+        </button>
+      </center>
+      {% endif %}
+    </form>
+  </div>
+</div>
+
+<div class="bottom-space"></div>
+{% endblock %}

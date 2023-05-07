@@ -1,0 +1,60 @@
+<!-- Button trigger modal -->
+<button
+  type="button"
+  class="btn btn-style"
+  data-bs-toggle="modal"
+  data-bs-target="#featureModal"
+>
+  + Features
+</button>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="featureModal"
+  tabindex="-1"
+  aria-labelledby="featureModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="featureModalLabel">Features</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body" style="height: 300px">
+        <form method="POST">
+          {% csrf_token %}
+          <div class="row">
+            {% for data in features %}
+            <div class="col-6 mb-3">
+              <div class="styled-checkbox p-3">
+                <div class="form-check">
+                  <input
+                    class="form-check-input checkbox-styling"
+                    type="checkbox"
+                    value="{{data.id}}"
+                    id="flexCheckDefault"
+                    name="FeatureID"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    {{data.name}}
+                  </label>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <button type="submit" name="save_features" class="btn btn-style">
+            save features
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

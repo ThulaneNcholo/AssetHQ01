@@ -1,0 +1,17 @@
+<div class="d-flex mt-5">
+  <a href="{% url 'add-inspection' inspection.id %}">
+    <button class="btn btn-style inspection-tabs">
+      <i class="bi bi-plus-circle-fill"></i> Inspections
+    </button>
+  </a>
+  <a href="{% url 'create-inspections' inspection.id %}">
+    <button class="btn btn-style inspection-tabs">
+      <i class="bi bi-list-check"></i> List Inspections
+    </button>
+  </a>
+  <a href="{% url 'share-inspection' inspection.id %}">
+    <button class="btn btn-style inspection-tabs">
+      <i class="bi bi-share-fill"></i> Share with
+    </button>
+  </a>
+</div>

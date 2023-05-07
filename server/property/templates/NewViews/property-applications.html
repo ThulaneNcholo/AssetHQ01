@@ -1,0 +1,187 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #775de2;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+
+  .applicants-hover:hover {
+    background-color: transparent !important;
+  }
+
+  /* Move in applicant style  */
+  .tenant-hero {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+  }
+
+  .dates-card {
+    background-color: var(--background-color);
+    border-radius: 10px;
+  }
+</style>
+
+<!-- ======= Property Hero Component  ======= -->
+{% include 'partials/actions.html' %}
+
+<div class="row mt-5">
+  <!-- ===================================== Property Applicants =============================== -->
+  <div class="col-12 col-md-12 col-lg-6 mb-5">
+    <!-- ======= Table start  ======= -->
+    <div class="main-container border p-3">
+      <h4>Property Applicants</h4>
+
+      <!-- ======= table headings ======= -->
+      <div class="row mt-5 heading-color">
+        <div class="col">Full Names</div>
+      </div>
+      <hr class="mb-4" />
+
+      <!-- ======= List managers rows ======= -->
+      {% for data in property_applicantions %}
+      <div class="row list-card py-1 applicants-hover">
+        <div class="col">
+          <div class="d-flex">
+            {% if data.profile_pic %}
+            <img src="{{data.profile_pic.url}}" alt="" class="avatar" />
+            {% else %}
+            <div class="circle-avatar">
+              <span>{{data.first_name|slice:"1"}}</span>
+            </div>
+            {% endif %}
+            <p class="d-flex align-items-center">
+              {{data.first_name}} {{data.last_name}}
+            </p>
+          </div>
+        </div>
+        <div class="col-8 d-none d-lg-block d-flex align-items-center">
+          <div class="row">
+            <div class="col">
+              <a href="{% url 'application-details'  data.id %}">
+                <button class="btn btn-style rounded-pill" style="width: 100%">
+                  view
+                </button>
+              </a>
+            </div>
+            <div class="col">
+              <a href="{% url 'lease' 'newlease' data.id %}">
+                <button class="btn secondary-btn rounded-pill">move in</button>
+              </a>
+            </div>
+            <div class="col">
+              <button class="btn btn-light rounded-pill" style="width: 100%">
+                remove
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="line-deco" />
+      {% empty %}
+      <h6 class="my-4">Property has no applicants</h6>
+      {% endfor%}
+    </div>
+  </div>
+
+  <!-- ===================================== Property Tenants start =============================== -->
+  <div class="col-12 col-md-12 col-lg-6 mb-5">
+    <div class="main-container border p-3">
+      <h4>Tenant</h4>
+      <!-- ======= table headings ======= -->
+      <div class="row mt-5 heading-color">
+        <div class="col">Full Names</div>
+        <div class="col d-none d-lg-block">Move in</div>
+        <div class="col d-none d-lg-block">Move out</div>
+      </div>
+      <hr class="mb-4" />
+      <!-- ======= List Tenant rows ======= -->
+      {% for data in property_tenants %} {% if data.status == 'Tenant'%}
+      <div class="row">
+        <div class="col">
+          <p>{{data.tenant.first_name}} {{data.tenant.last_name}}</p>
+        </div>
+        <div class="col">
+          <p>{{data.start_date}}</p>
+        </div>
+        <div class="col">
+          {% if data.end_date == today %}
+          <p class="bg-danger rounded-pill p-1 text-white">{{data.end_date}}</p>
+          {% else %}
+          <p>{{data.end_date}}</p>
+          {% endif %}
+        </div>
+      </div>
+      <hr class="line-deco" />
+      <!-- ======= tenant actions ======= -->
+      <div>
+        <a href="{% url 'application-details'  data.id %}">
+          <button class="btn btn-style">view tenant</button>
+        </a>
+        <a href="{% url 'lease' 'editlease' data.id %}">
+          <button class="btn btn-style">edit lease</button>
+        </a>
+        <button class="btn btn-style">move out</button>
+        <button class="btn btn-style">+ payment</button>
+      </div>
+      {% endif %}
+      <!-- divider  -->
+      {% empty %}
+      <h6 class="my-4">Property Vacant</h6>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<!-- ===================================== Property Rental History =============================== -->
+<div class="main-container border p-3">
+  <h4>Tenants History</h4>
+  <!-- ======= table headings ======= -->
+  <div class="row mt-5 heading-color">
+    <div class="col">Full Names</div>
+    <div class="col d-none d-lg-block">Moved in</div>
+    <div class="col d-none d-lg-block">Moved out</div>
+  </div>
+  <hr class="mb-4" />
+
+  <!-- ======= tenant history row ======= -->
+  {% for data in property_tenants %}
+  <!-- divider  -->
+  {% if data.status == 'History'%}
+  <div class="row list-card py-1 applicants-hover">
+    <div class="col">
+      <div class="d-flex">
+        {% if data.tenant.profile_pic %}
+        <img src="{{data.tenant.profile_pic.url}}" alt="" class="avatar" />
+        {% else %}
+        <div class="circle-avatar">
+          <span>{{data.tenant.first_name|slice:"1"}}</span>
+        </div>
+        {% endif %}
+        <p class="d-flex align-items-center">
+          {{data.tenant.first_name}} {{data.tenant.last_name}}
+        </p>
+      </div>
+    </div>
+    <div class="col">
+      <p>{{data.start_date}}</p>
+    </div>
+    <div class="col">
+      <p>{{data.end_date}}</p>
+    </div>
+  </div>
+  {% endif %}
+  <!-- divider  -->
+  {% empty %}
+  <h6 class="my-4">No Tenant History</h6>
+  {% endfor %}
+</div>
+
+<div class="bottom-space"></div>
+{% endblock %}

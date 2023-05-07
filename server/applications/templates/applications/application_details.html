@@ -1,0 +1,249 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #775de2;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+
+  /* hero component start  */
+  .hero-component {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    height: 100px;
+  }
+
+  .profile-image {
+    vertical-align: middle;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: lightgray;
+    margin-right: 10px;
+    margin-bottom: -120px;
+    border: 2px solid;
+    border-color: white;
+  }
+
+  /* information style start  */
+  .info-card {
+    background-color: white;
+    border-radius: 10px;
+  }
+
+  .info-headings {
+    margin-bottom: 5px;
+    font-weight: 700;
+    color: grey;
+  }
+
+  /* Managers styling  */
+  .secondary-images {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: lightgray;
+    margin-right: 10px;
+    border: 2px solid;
+    border-color: var(--primary-color);
+  }
+
+  .secondary-card-style {
+    background-color: var(--background-color);
+    border-radius: 10px;
+  }
+</style>
+
+<!-- ======= Messages Notification  ======= -->
+<div>
+  {% for message in messages %}
+  <div class="alert alert-primary my-5" role="alert">{{message}}</div>
+  {% endfor %}
+</div>
+
+<!-- ======= back button ======= -->
+<div class="mb-5 d-flex justify-content-between">
+  <button class="border-0 back-btn-bg" onclick="history.back()">
+    <i class="bi bi-arrow-left-square-fill back-btn"></i>
+  </button>
+  <a href="{% url 'create-application' applicant.id %}">
+    <button class="btn btn-style">
+      <i class="bi bi-pencil-square"></i> Edit Application
+    </button>
+  </a>
+</div>
+
+<!-- ======= hero component ======= -->
+<div class="hero-component p-3 d-flex">
+  {% if applicant.profile_pic %}
+  <img class="profile-image" src="{{applicant.profile_pic.url}}" alt="" />
+  {% else %}
+  <div class="profile-avatar">
+    <span><i class="bi bi-person-fill"></i></span>
+  </div>
+  {% endif %}
+  <div>
+    <h3 class="text-white">{{applicant.first_name}} {{applicant.last_name}}</h3>
+    <h6 class="text-white">{{applicant.role}}</h6>
+  </div>
+</div>
+
+<!-- ======= hero Actions ======= -->
+<i class="bi bi-arrow-right d-flex justify-content-end mb-3 mt-5"></i>
+<div class="button-container pb-4 mb-5">
+  <button class="btn btn-style">Accounts</button>
+  {% include 'partials/add_manager_partial.html' %}
+  <button class="btn btn-style">Files</button>
+  <button class="btn btn-style">Tasks</button>
+  <button class="btn btn-style">Reports</button>
+  {% include 'partials/select_property_application.html' %}
+  <button class="btn secondary-btn">Delete Applicant</button>
+</div>
+
+<!-- ======= Applicant Information ======= -->
+<div class="row mt-5">
+  <div class="col-12 col-md-12 col-lg-6 mb-3">
+    <div>
+      <!-- ======= basic information ======= -->
+      <div class="row">
+        <div class="col-12 col-md-6 mb-3">
+          <div class="info-card border p-3">
+            <p class="info-headings">Full Names</p>
+            <p class="mb-0">{{applicant.first_name}} {{applicant.last_name}}</p>
+          </div>
+        </div>
+        <!-- end info item  -->
+        <div class="col-12 col-md-6 mb-3">
+          <div class="info-card border p-3">
+            <p class="info-headings">Phone</p>
+            <p class="mb-0">{{applicant.phone}}</p>
+          </div>
+        </div>
+        <!-- end info item  -->
+        <div class="col-12 col-md-6 mb-3">
+          <div class="info-card border p-3">
+            <p class="info-headings">Email</p>
+            <p class="mb-0">{{applicant.email}}</p>
+          </div>
+        </div>
+        <!-- end info item  -->
+        <div class="col-12 col-md-6 mb-3">
+          <div class="info-card border p-3">
+            <p class="info-headings">Applicant Number</p>
+            <p class="mb-0">#{{applicant.application_number}}</p>
+          </div>
+        </div>
+        <!-- end info item  -->
+      </div>
+
+      <!-- ======= Location ======= -->
+      <h4 class="mt-5">Applicant Address</h4>
+      <div class="row mt-3">
+        <div class="col-12 col-md-6 mb-3">
+          <div class="info-card border p-3">
+            <p class="info-headings">Street</p>
+            <p class="mb-0">{{applicant.street}}</p>
+          </div>
+        </div>
+        <!-- end info item  -->
+        <div class="col-12 col-md-6 mb-3">
+          <div class="info-card border p-3">
+            <p class="info-headings">Town</p>
+            <p class="mb-0">{{applicant.town}}</p>
+          </div>
+        </div>
+        <!-- end info item  -->
+        <div class="col-12 col-md-6 mb-3">
+          <div class="info-card border p-3">
+            <p class="info-headings">City</p>
+            <p class="mb-0">{{applicant.city}}</p>
+          </div>
+        </div>
+        <!-- end info item  -->
+        <div class="col-12 col-md-6 mb-3">
+          <div class="info-card border p-3">
+            <p class="info-headings">Province</p>
+            <p class="mb-0">{{applicant.province}}</p>
+          </div>
+        </div>
+        <!-- end info item  -->
+        <div class="col-12 col-md-6 mb-3">
+          <div class="info-card border p-3">
+            <p class="info-headings">Postal Code</p>
+            <p class="mb-0">{{applicant.postal_code}}</p>
+          </div>
+        </div>
+        <!-- end info item  -->
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-12 col-lg-6 mb-3">
+    <div>
+      <!-- ======= Mangers Component ======= -->
+      <div class="info-card border p-3">
+        <p class="mb-4">Application Management</p>
+        {% for data in applicant_managers %}
+        <div class="row">
+          <div class="col">
+            <div class="d-flex p-2 secondary-card-style mb-3">
+              <img
+                src="{{data.profile_pic.url}}"
+                alt=""
+                class="secondary-images"
+              />
+              <div>
+                <p class="mb-0">{{data.first_name}} {{data.last_name}}</p>
+                <p class="mb-0">{{data.role}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-2 d-flex align-items-center">
+            <form method="POST">
+              {% csrf_token %}
+              <input
+                type="text"
+                name="managerID"
+                value="{{data.id}}"
+                hidden="true"
+              />
+              <button
+                type="submit"
+                name="delete_applicant_manager"
+                class="btn btn-style"
+              >
+                <i class="bi bi-trash3-fill"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+        {% empty %}
+        <div style="color: #775de2">
+          <center>
+            <i
+              class="bi bi-person-fill-exclamation mb-3"
+              style="font-size: 30px"
+            ></i>
+            <p class="text-secondary" style="font-size: 16px">
+              Application has no Managers Associated with it.
+            </p>
+          </center>
+        </div>
+        {% endfor %}
+        <!-- end manager item  -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bottom-space"></div>
+{% endblock %}

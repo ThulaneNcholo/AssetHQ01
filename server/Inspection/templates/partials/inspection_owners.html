@@ -1,0 +1,74 @@
+<!-- Button trigger modal -->
+<button
+  type="button"
+  class="btn btn-style rounded-pill"
+  data-bs-toggle="modal"
+  data-bs-target="#inspectionOwners"
+>
+  + owners
+</button>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="inspectionOwners"
+  tabindex="-1"
+  aria-labelledby="inspectionOwnersLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="inspectionOwnersLabel">
+          Share with Owners
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST">
+          {% csrf_token %}
+          <!-- divider  -->
+          {% for data in list_owners %}
+          <label class="list-group-item d-flex gap-2">
+            <div class="d-flex align-items-center">
+              <input
+                class="form-check-input flex-shrink-0 checkbox-style"
+                type="checkbox"
+                value="{{data.id}}"
+                name="ownerID"
+              />
+            </div>
+            <div class="d-flex justify-content-end">
+              <img
+                src="{{data.profile_pic.url}}"
+                alt=""
+                class="secondary-manager-images"
+              />
+            </div>
+            <span>
+              {{data.first_name}} {{data.last_name}}
+              <small class="d-block text-muted">{{data.owner_id}}</small>
+            </span>
+          </label>
+          {% endfor %}
+
+          <center>
+            <button
+              type="submit"
+              class="btn btn-style my-4"
+              name="add_inspection_owners"
+              style="width: 70%; font-size: 16px"
+            >
+              save owners
+            </button>
+          </center>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

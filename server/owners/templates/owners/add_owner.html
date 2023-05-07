@@ -1,0 +1,260 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #775de2;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+</style>
+
+<div class="mt-5 main-container p-3">
+  <h4>Add Owner</h4>
+  <!-- ======= Form start  ======= -->
+  <form class="mt-5" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <!-- divider  -->
+    {% if update != 'active' %}
+    <div class="mb-5">
+      <label for="userSelect" class="form-label mb-2"
+        >Associate with user</label
+      >
+      <select
+        class="form-select dropDrop-style"
+        aria-label="Default select example"
+        name="userSelect"
+      >
+        <option selected>Select User</option>
+        {% for data in users %}
+        <option value="{{data.id}}">{{data.first_name}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <!-- end associate with user input  -->
+    {% endif %}
+
+    <h6 class="mb-4 heading-style">Basic Information</h6>
+    <div class="row">
+      {% if update == 'active' %}
+      <div class="col-12 col-md-6">
+        <div class="mb-4">
+          <label for="user" class="form-label">User</label>
+          <input
+            type="text"
+            class="form-control readonly-input"
+            id="user"
+            aria-describedby="firstHelp"
+            readonly
+            value="{{owner.user.first_name}}"
+          />
+          <div id="user" class="form-text">Read only</div>
+        </div>
+      </div>
+      <!-- end input item  -->
+
+      <div class="col-12 col-md-6">
+        <div class="mb-4">
+          <label for="managerid" class="form-label">Owner ID</label>
+          <input
+            type="text"
+            class="form-control readonly-input"
+            id="managerid"
+            aria-describedby="firstHelp"
+            readonly
+            value="{{owner.owner_id}}"
+          />
+          <div id="managerid" class="form-text">Read only</div>
+        </div>
+      </div>
+      <!-- end input item  -->
+      {% endif %}
+      <div class="col-12 col-md-6">
+        <div class="mb-4">
+          <label for="firstNameInput" class="form-label">First Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="firstNameInput"
+            aria-describedby="firstHelp"
+            name="firstName"
+            value="{{owner.first_name}}"
+            placeholder="First Name"
+          />
+        </div>
+      </div>
+      <!-- end input item  -->
+      <div class="col-12 col-md-6">
+        <div class="mb-4">
+          <label for="lastName" class="form-label">Last Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="lastName"
+            aria-describedby="lastNameHelp"
+            name="LastName"
+            value="{{owner.last_name}}"
+            placeholder="Last Name"
+          />
+        </div>
+      </div>
+      <!-- end input item  -->
+      <div class="col-12 col-md-6">
+        <div class="mb-4">
+          <label for="Phone" class="form-label">Phone</label>
+          <input
+            type="number"
+            class="form-control"
+            id="phone"
+            aria-describedby="phoneHelp"
+            name="Phone"
+            value="{{owner.phone}}"
+            placeholder="Phone"
+          />
+        </div>
+      </div>
+      <!-- end input item  -->
+      <div class="col-12 col-md-6">
+        <div class="mb-4">
+          <label for="Email" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            aria-describedby="emailHelp"
+            name="Email"
+            value="{{owner.email}}"
+            placeholder="Email@"
+          />
+        </div>
+      </div>
+      <!-- end input item  -->
+    </div>
+
+    <h6 class="mb-4 heading-style my-4">Owner Address</h6>
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="mb-4">
+          <label for="Street" class="form-label">Street Address</label>
+          <input
+            type="text"
+            class="form-control"
+            id="street"
+            aria-describedby="streetHelp"
+            name="Street"
+            value="{{owner.street}}"
+            placeholder="Street"
+          />
+        </div>
+      </div>
+      <!-- end input item  -->
+      <div class="col-12 col-md-6">
+        <div class="mb-4">
+          <label for="Town" class="form-label">Town</label>
+          <input
+            type="text"
+            class="form-control"
+            id="town"
+            aria-describedby="townHelp"
+            name="Town"
+            value="{{owner.town}}"
+            placeholder="Town"
+          />
+        </div>
+      </div>
+      <!-- end input item  -->
+      <div class="col-12 col-md-6">
+        <div class="mb-4">
+          <label for="City" class="form-label">City</label>
+          <input
+            type="text"
+            class="form-control"
+            id="city"
+            aria-describedby="cityHelp"
+            name="City"
+            value="{{owner.city}}"
+            placeholder="City"
+          />
+        </div>
+      </div>
+      <!-- end input item  -->
+      <div class="col-12 col-md-6">
+        <div class="mb-4">
+          <label for="Province" class="form-label">Province</label>
+          <input
+            type="text"
+            class="form-control"
+            id="province"
+            aria-describedby="provinceHelp"
+            name="Province"
+            value="{{owner.province}}"
+            placeholder="Province"
+          />
+        </div>
+      </div>
+      <!-- end input item  -->
+      <div class="col-12 col-md-6">
+        <div class="mb-4">
+          <label for="Postal_code" class="form-label">Postal Code</label>
+          <input
+            type="text"
+            class="form-control"
+            id="postal_code"
+            aria-describedby="postal_codeHelp"
+            name="Postal_code"
+            value="{{owner.postal_code}}"
+            placeholder="Postal Code"
+          />
+        </div>
+      </div>
+      <!-- end input item  -->
+      <div class="col-12 col-md-6">
+        <div class="mb-4">
+          <label for="Coverimage" class="form-label">Profile Image</label>
+          <input
+            type="file"
+            class="form-control"
+            id="coverimage"
+            aria-describedby="coverimageHelp"
+            name="Coverimage"
+            value="{{owner.profile_pic}}"
+          />
+        </div>
+      </div>
+      <!-- end input item  -->
+
+      {% if update == 'active' %}
+      <center>
+        <button
+          type="submit"
+          name="update_owner"
+          style="width: 70%"
+          class="btn btn-style my-4 py-2"
+        >
+          Update Manager
+        </button>
+      </center>
+      {% else %}
+      <center>
+        <button
+          type="submit"
+          name="create_owner"
+          style="width: 70%"
+          class="btn btn-style my-4 py-2"
+        >
+          Create Manager
+        </button>
+      </center>
+      {% endif %}
+    </div>
+  </form>
+</div>
+
+<div class="bottom-space"></div>
+{% endblock %}

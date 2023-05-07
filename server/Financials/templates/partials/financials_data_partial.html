@@ -1,0 +1,85 @@
+<!-- ======= Table start  ======= -->
+<div class="main-container border p-3 mt-5">
+  <h4>Properties Financials</h4>
+
+  <!-- ======= table headings ======= -->
+  <div class="row mt-5 heading-color">
+    <div class="col">Property</div>
+    <div class="col d-none d-lg-block">Expenses</div>
+    <div class="col d-none d-lg-block">Income</div>
+    <div class="col d-none d-lg-block">Rent</div>
+    <div class="col">Total</div>
+  </div>
+  <hr class="mb-4" />
+
+  <!-- ======= List managers rows ======= -->
+  {% for data in properties %}
+  <a href="{% url 'property-financials' data.id %}">
+    <div class="row list-card py-1">
+      <div class="col">
+        <div class="d-flex">
+          {% if data.coverImage %}
+          <img src="{{data.coverImage.url}}" alt="" class="avatar" />
+          {% else %}
+          <div class="circle-avatar">
+            <span>{{data.propertyName|slice:"1"}}</span>
+          </div>
+          {% endif %}
+          <p class="d-flex align-items-center">{{data.propertyName}}</p>
+        </div>
+      </div>
+
+      <div class="col d-none d-lg-block d-flex align-items-center">
+        <p>R{{data.total_expense}}</p>
+      </div>
+
+      <div class="col d-none d-lg-block d-flex align-items-center">
+        <p>R{{data.total_income}}</p>
+      </div>
+
+      <div class="col d-none d-lg-block d-flex align-items-center">
+        <p>R{{data.total_rent}}</p>
+      </div>
+
+      <div class="col d-flex align-items-center">
+        {% if data.total_net < 0 %}
+        <p class="fw-bold text-danger">R{{data.total_net }}</p>
+        {% else %}
+        <p class="fw-bold">R{{data.total_net }}</p>
+        {% endif %}
+      </div>
+
+      <!-- <div class="col d-none d-lg-block d-flex align-items-center">
+        <div class="d-flex">
+          <p>{{data.date_created |date:"l, d F, Y"}}</p>
+          <i class="bi bi-eye-fill view-icon"></i>
+        </div>
+      </div> -->
+    </div>
+  </a>
+  <hr class="line-deco" />
+  {% endfor %}
+
+  <!-- ======= Totals section start ======= -->
+  <div class="row list-card py-3 total-row">
+    <div class="col d-flex align-items-center">
+      <p class="fw-bold text-white">TOTAL</p>
+    </div>
+
+    <div class="col d-none d-lg-block d-flex align-items-center">
+      <p class="fw-bold text-white">R{{all_total_expenses}}</p>
+    </div>
+
+    <div class="col d-none d-lg-block d-flex align-items-center">
+      <p class="fw-bold text-white">R{{all_total_income}}</p>
+    </div>
+
+    <div class="col d-none d-lg-block d-flex align-items-center">
+      <p class="fw-bold text-white">R{{all_total_rent}}</p>
+    </div>
+
+    <div class="col d-flex align-items-center">
+      <p class="fw-bold text-white">R{{grand_total}}</p>
+    </div>
+  </div>
+</div>

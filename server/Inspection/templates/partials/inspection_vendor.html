@@ -1,0 +1,73 @@
+<!-- Button trigger modal -->
+<button
+  type="button"
+  class="btn btn-style rounded-pill"
+  data-bs-toggle="modal"
+  data-bs-target="#inspectionVendor"
+>
+  + vendors
+</button>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="inspectionVendor"
+  tabindex="-1"
+  aria-labelledby="inspectionVendorLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="inspectionVendorLabel">
+          Share with Vendors
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST">
+          {% csrf_token %}
+          <!-- divider  -->
+          {% for data in list_vendors %}
+          <label class="list-group-item d-flex gap-2">
+            <div class="d-flex align-items-center">
+              <input
+                class="form-check-input flex-shrink-0 checkbox-style"
+                type="checkbox"
+                value="{{data.id}}"
+                name="vendorID"
+              />
+            </div>
+            <div class="d-flex justify-content-end">
+              <img
+                src="{{data.cover_image.url}}"
+                alt=""
+                class="secondary-manager-images"
+              />
+            </div>
+            <span>
+              {{data.company_name}}
+            </span>
+          </label>
+          {% endfor %}
+
+          <center>
+            <button
+              type="submit"
+              class="btn btn-style my-4"
+              name="add_inspection_vendor"
+              style="width: 70%; font-size: 16px"
+            >
+              save vendor
+            </button>
+          </center>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

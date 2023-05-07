@@ -1,0 +1,261 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #775de2;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+
+  .task-card-size {
+    width: 720px;
+    max-width: 720px;
+  }
+
+  .task-property-image {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+  }
+
+  .property-task-card {
+    border-radius: 10px;
+    background-color: var(--background-color);
+  }
+
+  .task-actions {
+    margin-right: 20px;
+    width: 200px;
+  }
+
+  /* Secondary styling start  */
+  .secondary-manager-images {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: lightgray;
+    margin-right: 10px;
+    border: 2px solid;
+    border-color: var(--primary-color);
+  }
+
+  .secondary-card-style {
+    background-color: var(--background-color);
+    border-radius: 10px;
+  }
+</style>
+
+<button class="border-0 back-btn-bg" onclick="history.back()">
+  <i class="bi bi-arrow-left-square-fill back-btn"></i>
+</button>
+
+<!-- ======= Messages Notification  ======= -->
+<div>
+  {% for message in messages %}
+  <div class="alert alert-primary my-5" role="alert">{{message}}</div>
+  {% endfor %}
+</div>
+
+<!-- ======= Headings  ======= -->
+<div class="row mt-5">
+  <div class="col d-flex justify-content-start">
+    <h4>{{task.title}}</h4>
+  </div>
+  <div class="col d-flex justify-content-end">
+    <button class="btn btn-style mx-2">
+      <i class="bi bi-pencil-square"></i> edit Task
+    </button>
+    <button class="btn btn-light mx-2">Delete Task</button>
+  </div>
+</div>
+
+<!-- ======= Mark as Task  ======= -->
+<h6 class="mt-5 fw-bold">Mark Task as :</h6>
+<form method="POST" class="d-flex">
+  {% csrf_token %}
+  <button type="submit" name="open_task" class="btn btn-style task-actions">
+    Open
+  </button>
+  <button type="submit" name="progress_task" class="btn btn-style task-actions">
+    In Progress
+  </button>
+  <button type="submit" name="complete_task" class="btn btn-style task-actions">
+    Complete
+  </button>
+</form>
+
+<div class="main-container border px-3 py-4 mt-5 mb-4">
+  <p class="mb-1 text-secondary">Titlte</p>
+  <h5 class="mb-5">{{task.title}}</h5>
+  <p class="mb-1 text-secondary">Description</p>
+  <p class="mb-5" style="font-size: 16px">{{task.description}}</p>
+  <p class="mb-1 text-secondary">Status</p>
+  <p class="mb-5" style="font-size: 16px">{{task.status.name}}</p>
+  <p class="mb-1 text-secondary">Due Date</p>
+  <p class="mb-5" style="font-size: 16px">{{task.due_date}}</p>
+
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <div>
+        <p class="mb-1 text-secondary">Property</p>
+        <div class="d-flex p-2 property-task-card mt-3 mb-5">
+          <img
+            src="{{task.property.coverImage.url}}"
+            alt=""
+            class="task-property-image"
+          />
+          <div>
+            <p class="mb-0">{{task.property.propertyName}}</p>
+            <p class="mb-0 text-secondary">#{{task.property.listing_number}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <div>
+        <p class="mb-1 text-secondary">Created By</p>
+        <div class="d-flex p-2 property-task-card mt-3 mb-5">
+          <img
+            src="{{task.created_by.profile_pic.url}}"
+            alt=""
+            class="task-property-image"
+          />
+          <div>
+            <p class="mb-0">
+              {{task.created_by.first_name}} {{task.created_by.last_name}}
+            </p>
+            <p class="mb-0 text-secondary">
+              #{{task.created_by.manager_number}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ Share Task With  ================================================= -->
+<h4 class="mt-5 mb-4">Share Task With :</h4>
+<div class="row">
+  <!-- ======= Property Managers  ======= -->
+  <div class="col-12 col-md-6 col-lg-4 mb-5">
+    <div class="main-container border p-3 sectionTwo-component">
+      <div class="row">
+        <div class="col d-flex align-items-center">
+          <p class="secondary-components-headings mb-0">Managers</p>
+        </div>
+        <div class="col d-flex justify-content-end">
+          {% include 'partials/manager_partial.html' %}
+        </div>
+      </div>
+      <!-- end card hero  -->
+      <div class="my-5 card-scroll">
+        {% for data in task_managers %}
+        <a
+          href="{% url 'manager-details' data.id %}"
+          class="list-group-item-action d-flex gap-3 p-3 secondary-card-style mb-3"
+          aria-current="true"
+        >
+          <img
+            src="{{data.profile_pic.url}}"
+            alt=""
+            class="secondary-manager-images"
+          />
+          <div class="d-flex gap-2 w-100 justify-content-between">
+            <div>
+              <p class="mb-0">{{data.first_name}} {{data.last_name}}</p>
+              <p class="mb-0">{{data.role}}</p>
+            </div>
+            <small class="text-nowrap">
+              <form method="POST">
+                {% csrf_token %}
+                <input
+                  type="text"
+                  name="managerID"
+                  value="{{data.id}}"
+                  hidden="true"
+                />
+                <button
+                  type="submit"
+                  name="delete-manager"
+                  class="btn btn-style"
+                >
+                  <i class="bi bi-trash3-fill"></i>
+                </button>
+              </form>
+            </small>
+          </div>
+        </a>
+        {% empty %}
+        <h6 class="my-4">No Managers associated with Task.</h6>
+        {% endfor%}
+      </div>
+      <!-- end manager item  -->
+    </div>
+  </div>
+  <!-- ======= Property Owners  ======= -->
+  <div class="col-12 col-md-6 col-lg-4 mb-5">
+    <div class="main-container border p-3 sectionTwo-component">
+      <div class="row">
+        <div class="col d-flex align-items-center">
+          <p class="secondary-components-headings mb-0">Owners</p>
+        </div>
+        <div class="col d-flex justify-content-end">
+          {% include 'partials/owner_modal.html' %}
+        </div>
+      </div>
+      <!-- end card hero  -->
+      <div class="my-5 card-scroll">
+        {% for data in task_owners %}
+        <a
+          href="#"
+          class="list-group-item-action d-flex gap-3 p-3 secondary-card-style mb-3"
+          aria-current="true"
+        >
+          <img
+            src="{{data.profile_pic.url}}"
+            alt=""
+            class="secondary-manager-images"
+          />
+          <div class="d-flex gap-2 w-100 justify-content-between">
+            <div>
+              <p class="mb-0">{{data.first_name}} {{data.last_name}}</p>
+              <p class="mb-0">{{data.role}}</p>
+            </div>
+            <small class="text-nowrap">
+              <form method="POST">
+                {% csrf_token %}
+                <input
+                  type="text"
+                  name="owner_ID"
+                  value="{{data.id}}"
+                  hidden="true"
+                />
+                <button type="submit" name="remove_owner" class="btn btn-style">
+                  <i class="bi bi-trash3-fill"></i>
+                </button>
+              </form>
+            </small>
+          </div>
+        </a>
+        {% empty %}
+        <h6 class="my-4">No Owners associated with Task.</h6>
+        {% endfor%}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bottom-space"></div>
+{% endblock %}

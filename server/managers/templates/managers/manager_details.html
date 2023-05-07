@@ -1,0 +1,299 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #775de2;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+  }
+
+  .hero-component {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    height: 100px;
+  }
+
+  .profile-image {
+    vertical-align: middle;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: lightgray;
+    margin-right: 10px;
+    margin-bottom: -120px;
+    border: 2px solid;
+    border-color: white;
+  }
+
+  .info-card {
+    background-color: white;
+    border-radius: 10px;
+  }
+
+  .info-headings {
+    margin-bottom: 5px;
+    font-weight: 700;
+    color: grey;
+  }
+
+  .options-card {
+    background-color: var(--background-color);
+    border-radius: 10px;
+  }
+</style>
+
+<!-- ======= back button ======= -->
+<div class="mb-5">
+  <button class="border-0 back-btn-bg" onclick="history.back()">
+    <i class="bi bi-arrow-left-square-fill back-btn"></i>
+  </button>
+</div>
+
+<!-- ======= hero component ======= -->
+<div class="hero-component p-3 d-flex">
+  {% if manager.profile_pic %}
+  <img class="profile-image" src="{{manager.profile_pic.url}}" alt="" />
+  {% else %}
+  <div class="profile-image"></div>
+  {% endif %}
+  <h3 class="text-white">{{manager.first_name}} {{manager.last_name}}</h3>
+</div>
+
+<!-- ======= Actions buttons ======= -->
+<div class="d-flex justify-content-between mt-5">
+  <a href="{% url 'add-manager' manager.id %}">
+    <button class="btn btn-style">
+      <i class="bi bi-pencil-square"></i> Edit Manager
+    </button>
+  </a>
+
+  <div>
+    <button
+      class="btn secondary-btn hide-component"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+    >
+      <i class="bi bi-trash3-fill"></i> Remove Manager
+    </button>
+    <button
+      class="btn options-btn"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#optionsActions"
+      aria-controls="optionsActions"
+    >
+      Options
+    </button>
+  </div>
+</div>
+
+<!-- Remove Manager Modal  -->
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Remove Manager</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row mb-5 mt-4">
+          <div class="col">
+            <button class="btn btn-danger">Delete Manager</button>
+          </div>
+          <div class="col">
+            <button class="btn secondary-btn">Deactivate Manager</button>
+          </div>
+        </div>
+        <p class="text-secondary">
+          By Deactivate you won't delete the account it will be available to
+          re-activate.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Options offcanvas start  -->
+<div
+  class="offcanvas offcanvas-start"
+  tabindex="-1"
+  id="optionsActions"
+  aria-labelledby="optionsActionsLabel"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="optionsActionsLabel">Options</h5>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <!-- options start  -->
+    <div class="row options-card p-3 mx-0 mb-3">
+      <div class="col">
+        <div class="d-flex">
+          <i class="bi bi-trash3-fill px-2"></i>
+          <p class="mb-0 d-flex align-items-center">Delete Manager</p>
+        </div>
+      </div>
+      <div class="col-2 d-flex justify-content-end">
+        <i class="bi bi-arrow-right-circle-fill"></i>
+      </div>
+    </div>
+    <!-- end options item  -->
+
+    <div class="row options-card p-3 mx-0 mb-3">
+      <div class="col">
+        <div class="d-flex">
+          <i class="bi bi-airplane-fill px-2"></i>
+          <p class="mb-0 d-flex align-items-center">Deactivate Account</p>
+        </div>
+      </div>
+      <div class="col-2 d-flex justify-content-end">
+        <i class="bi bi-arrow-right-circle-fill"></i>
+      </div>
+    </div>
+    <!-- end options item  -->
+
+    <div class="row options-card p-3 mx-0 mb-3">
+      <div class="col">
+        <div class="d-flex">
+          <i class="bi bi-house-add-fill px-2"></i>
+          <p class="mb-0 d-flex align-items-center">Assign Properties</p>
+        </div>
+      </div>
+      <div class="col-2 d-flex justify-content-end">
+        <i class="bi bi-arrow-right-circle-fill"></i>
+      </div>
+    </div>
+    <!-- end options item  -->
+
+    <div class="row options-card p-3 mx-0 mb-3">
+      <div class="col">
+        <div class="d-flex">
+          <i class="bi bi-person-fill-add px-2"></i>
+          <p class="mb-0 d-flex align-items-center">Assign to Owner</p>
+        </div>
+      </div>
+      <div class="col-2 d-flex justify-content-end">
+        <i class="bi bi-arrow-right-circle-fill"></i>
+      </div>
+    </div>
+    <!-- end options item  -->
+
+    <div class="row options-card p-3 mx-0 mb-3">
+      <div class="col">
+        <div class="d-flex">
+          <i class="bi bi-envelope-at-fill px-2"></i>
+          <p class="mb-0 d-flex align-items-center">Email</p>
+        </div>
+      </div>
+      <div class="col d-flex justify-content-end">
+        <i class="bi bi-arrow-right-circle-fill"></i>
+      </div>
+    </div>
+    <!-- end options item  -->
+  </div>
+</div>
+
+<!-- ======= basic information ======= -->
+<div class="row mt-5">
+  <div class="col-12 col-md-6 mb-3">
+    <div class="info-card border p-3">
+      <p class="info-headings">Full Names</p>
+      <p class="mb-0">{{manager.first_name}} {{manager.last_name}}</p>
+    </div>
+  </div>
+  <!-- end info item  -->
+  <div class="col-12 col-md-6 mb-3">
+    <div class="info-card border p-3">
+      <p class="info-headings">Phone</p>
+      <p class="mb-0">{{manager.phone}}</p>
+    </div>
+  </div>
+  <!-- end info item  -->
+
+  <div class="col-12 col-md-6 mb-3">
+    <div class="info-card border p-3">
+      <p class="info-headings">Email</p>
+      <p class="mb-0">{{manager.email}}</p>
+    </div>
+  </div>
+  <!-- end info item  -->
+
+  <div class="col-12 col-md-6 mb-3">
+    <div class="info-card border p-3">
+      <p class="info-headings">Manager ID</p>
+      <p class="mb-0">#{{manager.manager_number}}</p>
+    </div>
+  </div>
+  <!-- end info item  -->
+</div>
+
+<!-- ======= Location ======= -->
+<h4 class="mt-5">Manager Address</h4>
+
+<div class="row mt-3">
+  <div class="col-12 col-md-6 mb-3">
+    <div class="info-card border p-3">
+      <p class="info-headings">Street</p>
+      <p class="mb-0">{{manager.street}}</p>
+    </div>
+  </div>
+  <!-- end info item  -->
+
+  <div class="col-12 col-md-6 mb-3">
+    <div class="info-card border p-3">
+      <p class="info-headings">Town</p>
+      <p class="mb-0">{{manager.town}}</p>
+    </div>
+  </div>
+  <!-- end info item  -->
+
+  <div class="col-12 col-md-6 mb-3">
+    <div class="info-card border p-3">
+      <p class="info-headings">City</p>
+      <p class="mb-0">{{manager.city}}</p>
+    </div>
+  </div>
+  <!-- end info item  -->
+
+  <div class="col-12 col-md-6 mb-3">
+    <div class="info-card border p-3">
+      <p class="info-headings">Province</p>
+      <p class="mb-0">{{manager.province}}</p>
+    </div>
+  </div>
+  <!-- end info item  -->
+
+  <div class="col-12 col-md-6 mb-3">
+    <div class="info-card border p-3">
+      <p class="info-headings">Postal Code</p>
+      <p class="mb-0">{{manager.postal_code}}</p>
+    </div>
+  </div>
+  <!-- end info item  -->
+</div>
+
+<div class="bottom-space"></div>
+
+{% endblock %}

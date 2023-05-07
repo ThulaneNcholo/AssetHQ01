@@ -1,0 +1,326 @@
+<div class="sidebar p-3 d-none d-md-block">
+  <h3 class="sidebar-title mb-5">AssetHQ</h3>
+
+  <a href="{% url 'index' %}">
+    <div class="d-flex mb-3 sidebar-hover p-2">
+      <div class="sidebar-icon-container">
+        <i class="bi bi-grid-1x2-fill"></i>
+      </div>
+      <div class="d-flex align-items-center">
+        <p>Dashboard</p>
+      </div>
+    </div>
+  </a>
+  <!-- end sidebar item link  -->
+
+  <a
+    data-bs-toggle="offcanvas"
+    href="#usersOffcanvas"
+    aria-controls="usersOffcanvas"
+  >
+    <div class="d-flex mb-3 sidebar-hover p-2">
+      <div class="sidebar-icon-container">
+        <i class="bi bi-people-fill"></i>
+      </div>
+      <div class="d-flex align-items-center">
+        <p>Users</p>
+      </div>
+    </div>
+  </a>
+  <!-- end sidebar item link  -->
+
+  <a
+    data-bs-toggle="offcanvas"
+    href="#applicationsOffcanvas"
+    aria-controls="applicationsOffcanvas"
+  >
+    <div class="d-flex mb-3 sidebar-hover p-2">
+      <div class="sidebar-icon-container">
+        <i class="bi bi-person-lines-fill"></i>
+      </div>
+      <div class="d-flex align-items-center">
+        <p>Applications</p>
+      </div>
+    </div>
+  </a>
+  <!-- end sidebar item link  -->
+
+  <a data-bs-toggle="offcanvas" href="#properties" aria-controls="properties">
+    <div class="d-flex mb-3 sidebar-hover p-2">
+      <div class="sidebar-icon-container">
+        <i class="bi bi-houses-fill"></i>
+      </div>
+      <div class="d-flex align-items-center">
+        <p>Properties</p>
+      </div>
+    </div>
+  </a>
+  <!-- end sidebar item link  -->
+
+  <a href="{% url 'list-inspections' %}" aria-controls="vendors">
+    <div class="d-flex mb-3 sidebar-hover p-2">
+      <div class="sidebar-icon-container">
+        <i class="bi bi-building-fill-check"></i>
+      </div>
+      <div class="d-flex align-items-center">
+        <p>Inspections</p>
+      </div>
+    </div>
+  </a>
+  <!-- end sidebar item link  -->
+
+  <a href="{% url 'list-vendors' %}" aria-controls="vendors">
+    <div class="d-flex mb-3 sidebar-hover p-2">
+      <div class="sidebar-icon-container">
+        <i class="bi bi-gear-fill"></i>
+      </div>
+      <div class="d-flex align-items-center">
+        <p>Vendors</p>
+      </div>
+    </div>
+  </a>
+  <!-- end sidebar item link  -->
+
+  <a href="{% url 'tasks' %}" aria-controls="vendors">
+    <div class="d-flex mb-3 sidebar-hover p-2">
+      <div class="sidebar-icon-container">
+        <i class="bi bi-journal-bookmark-fill"></i>
+      </div>
+      <div class="d-flex align-items-center">
+        <p>Tasks</p>
+        <span class="badge bg-danger mx-3">4</span>
+      </div>
+    </div>
+  </a>
+  <!-- end sidebar item link  -->
+
+  <a data-bs-toggle="offcanvas" href="#files" aria-controls="files">
+    <div class="d-flex mb-3 sidebar-hover p-2">
+      <div class="sidebar-icon-container">
+        <i class="bi bi-folder-fill"></i>
+      </div>
+      <div class="d-flex align-items-center">
+        <p>Files</p>
+      </div>
+    </div>
+  </a>
+  <!-- end sidebar item link  -->
+
+  <a href="{% url 'list-requests' %}" aria-controls="vendors">
+    <div class="d-flex mb-3 sidebar-hover p-2">
+      <div class="sidebar-icon-container">
+        <i class="bi bi-send-fill"></i>
+      </div>
+      <div class="d-flex align-items-center">
+        <p>Requests</p>
+      </div>
+    </div>
+  </a>
+  <!-- end sidebar item link  -->
+
+  <a href="{% url 'financials' %}" aria-controls="vendors">
+    <div class="d-flex mb-3 sidebar-hover p-2">
+      <div class="sidebar-icon-container">
+        <i class="bi bi-calculator-fill"></i>
+      </div>
+      <div class="d-flex align-items-center">
+        <p>Financials</p>
+      </div>
+    </div>
+  </a>
+  <!-- end sidebar item link  -->
+</div>
+
+<!-- =============================================================================== -->
+
+<!-- ======= Users Offcanvas start  ======= -->
+<div
+  class="offcanvas offcanvas-start"
+  tabindex="-1"
+  id="usersOffcanvas"
+  aria-labelledby="usersOffcanvasLabel"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="usersOffcanvasLabel">Users</h5>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <a href="#">
+      <div class="d-flex justify-content-between p-2 offcanvas-links mb-3">
+        <p class="mb-0 d-flex align-items-center text-white">All Users</p>
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </a>
+    <!-- end link item  -->
+
+    <a href="{% url 'managers' %}">
+      <div class="d-flex justify-content-between p-2 offcanvas-links mb-3">
+        <p class="mb-0 d-flex align-items-center text-white">Managers</p>
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </a>
+    <!-- end link item  -->
+
+    <a href="{% url 'owners' %}">
+      <div class="d-flex justify-content-between p-2 offcanvas-links mb-3">
+        <p class="mb-0 d-flex align-items-center text-white">Owners</p>
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </a>
+    <!-- end link item  -->
+  </div>
+</div>
+
+<!-- ======= Applications Offcanvas start  ======= -->
+<div
+  class="offcanvas offcanvas-start"
+  tabindex="-1"
+  id="applicationsOffcanvas"
+  aria-labelledby="applicationsOffcanvasLabel"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="applicationsOffcanvasLabel">
+      Applications
+    </h5>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <a href="{% url 'create-application' %}">
+      <div class="d-flex justify-content-between p-2 offcanvas-links mb-3">
+        <p class="mb-0 d-flex align-items-center text-white">
+          Create New Application
+        </p>
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </a>
+    <!-- end link item  -->
+
+    <a href="{% url 'rentals' %}">
+      <div class="d-flex justify-content-between p-2 offcanvas-links mb-3">
+        <p class="mb-0 d-flex align-items-center text-white">
+          Rental Applications
+        </p>
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </a>
+    <!-- end link item  -->
+
+    <a href="{% url 'buyers' %}">
+      <div class="d-flex justify-content-between p-2 offcanvas-links mb-3">
+        <p class="mb-0 d-flex align-items-center text-white">
+          Buyer Applications
+        </p>
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </a>
+    <!-- end link item  -->
+  </div>
+</div>
+
+<!-- ======= Properties Offcanvas start  ======= -->
+<div
+  class="offcanvas offcanvas-start"
+  tabindex="-1"
+  id="properties"
+  aria-labelledby="propertiesLabel"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="propertiesLabel">Properties</h5>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <a href="{% url 'add-property' %}">
+      <div class="d-flex justify-content-between p-2 offcanvas-links mb-3">
+        <p class="mb-0 d-flex align-items-center text-white">Add Property</p>
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </a>
+    <!-- end link item  -->
+
+    <a href="{% url 'properties' %}">
+      <div class="d-flex justify-content-between p-2 offcanvas-links mb-3">
+        <p class="mb-0 d-flex align-items-center text-white">All Properties</p>
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </a>
+    <!-- end link item  -->
+
+    <a href="{% url 'rentals' %}">
+      <div class="d-flex justify-content-between p-2 offcanvas-links mb-3">
+        <p class="mb-0 d-flex align-items-center text-white">For Rent</p>
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </a>
+    <!-- end link item  -->
+
+    <a href="{% url 'buyers' %}">
+      <div class="d-flex justify-content-between p-2 offcanvas-links mb-3">
+        <p class="mb-0 d-flex align-items-center text-white">For Sale</p>
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </a>
+    <!-- end link item  -->
+  </div>
+</div>
+
+<!-- ======= Files Offcanvas start  ======= -->
+<div
+  class="offcanvas offcanvas-start"
+  tabindex="-1"
+  id="files"
+  aria-labelledby="filesLabel"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="filesLabel">Files</h5>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <a href="{% url 'property-documents' %}">
+      <div class="d-flex justify-content-between p-2 offcanvas-links mb-3">
+        <p class="mb-0 d-flex align-items-center text-white">
+          Properties Files
+        </p>
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </a>
+    <!-- end link item  -->
+
+    <a href="{% url 'rentals' %}">
+      <div class="d-flex justify-content-between p-2 offcanvas-links mb-3">
+        <p class="mb-0 d-flex align-items-center text-white">Owners Files</p>
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </a>
+    <!-- end link item  -->
+
+    <a href="{% url 'buyers' %}">
+      <div class="d-flex justify-content-between p-2 offcanvas-links mb-3">
+        <p class="mb-0 d-flex align-items-center text-white">
+          Applicants Files
+        </p>
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </a>
+    <!-- end link item  -->
+  </div>
+</div>

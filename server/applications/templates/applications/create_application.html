@@ -1,0 +1,232 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% block content %}
+
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #775de2;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+</style>
+
+<div class="mt-5 main-container border p-3">
+  <h4>Create New Application</h4>
+  <!-- ======= Form start  ======= -->
+  <form class="mt-5" method="POST">
+    {% csrf_token %}
+    <!-- ======= associate with user ======= -->
+    <div class="mb-5">
+      <label for="userSelect" class="form-label mb-2"
+        >Associate with user</label
+      >
+      <select
+        class="form-select dropDrop-style"
+        aria-label="Default select example"
+        name="userSelect"
+      >
+        {% if applicant.user != None %}
+        <option selected value="{{applicant.user}}">{{applicant.user}}</option>
+        {% else %}
+        <option selected>Select User</option>
+        {% endif %}
+        <!-- divider  -->
+        {% for data in users %}
+        <option value="{{data.id}}">{{data.first_name}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <!-- end associate with user input  -->
+
+    <div class="mb-5">
+      <label for="userSelect" class="form-label mb-2">Application Type</label>
+      <select
+        class="form-select dropDrop-style"
+        aria-label="application type"
+        name="applicationType"
+      >
+        {% if applicant.application_type != None %}
+        <option selected value="{{applicant.application_type}}">
+          {{applicant.application_type}}
+        </option>
+        {% else %}
+        <option selected>Select Application Type</option>
+        {% endif %}
+        <option value="Rental">Rental</option>
+        <option value="Buyer">Buyer</option>
+      </select>
+    </div>
+    <!-- end application type  -->
+
+    <h6 class="mb-4 heading-style">Basic Information</h6>
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="mb-4">
+          <label for="firstNameInput" class="form-label">First Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="firstNameInput"
+            aria-describedby="firstHelp"
+            name="firstName"
+            value="{{applicant.first_name}}"
+            placeholder="First Name"
+          />
+        </div>
+      </div>
+      <!-- end input item  -->
+      <div class="col-12 col-md-6">
+        <div class="mb-4">
+          <label for="lastName" class="form-label">Last Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="lastName"
+            aria-describedby="lastNameHelp"
+            name="LastName"
+            value="{{applicant.last_name}}"
+            placeholder="Last Name"
+          />
+        </div>
+      </div>
+      <!-- end input item  -->
+      <div class="col-12 col-md-6">
+        <div class="mb-4">
+          <label for="Phone" class="form-label">Phone</label>
+          <input
+            type="number"
+            class="form-control"
+            id="phone"
+            aria-describedby="phoneHelp"
+            name="Phone"
+            value="{{applicant.phone}}"
+            placeholder="Phone"
+          />
+        </div>
+      </div>
+      <!-- end input item  -->
+      <div class="col-12 col-md-6">
+        <div class="mb-4">
+          <label for="Email" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            aria-describedby="emailHelp"
+            name="Email"
+            value="{{applicant.email}}"
+            placeholder="Email@"
+          />
+        </div>
+      </div>
+      <!-- end input item  -->
+    </div>
+    <h6 class="mb-4 heading-style my-4">Address</h6>
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="mb-4">
+          <label for="Street" class="form-label">Street Address</label>
+          <input
+            type="text"
+            class="form-control"
+            id="street"
+            aria-describedby="streetHelp"
+            name="Street"
+            value="{{applicant.street}}"
+            placeholder="Street"
+          />
+        </div>
+      </div>
+      <!-- end input item  -->
+      <div class="col-12 col-md-6">
+        <div class="mb-4">
+          <label for="Town" class="form-label">Town</label>
+          <input
+            type="text"
+            class="form-control"
+            id="town"
+            aria-describedby="townHelp"
+            name="Town"
+            value="{{applicant.town}}"
+            placeholder="Town"
+          />
+        </div>
+      </div>
+      <!-- end input item  -->
+      <div class="col-12 col-md-6">
+        <div class="mb-4">
+          <label for="City" class="form-label">City</label>
+          <input
+            type="text"
+            class="form-control"
+            id="city"
+            aria-describedby="cityHelp"
+            name="City"
+            value="{{applicant.city}}"
+            placeholder="City"
+          />
+        </div>
+      </div>
+      <!-- end input item  -->
+      <div class="col-12 col-md-6">
+        <div class="mb-4">
+          <label for="Province" class="form-label">Province</label>
+          <input
+            type="text"
+            class="form-control"
+            id="province"
+            aria-describedby="provinceHelp"
+            name="Province"
+            value="{{applicant.province}}"
+            placeholder="Province"
+          />
+        </div>
+      </div>
+      <!-- end input item  -->
+      <div class="col-12 col-md-6">
+        <div class="mb-4">
+          <label for="Postal_code" class="form-label">Postal Code</label>
+          <input
+            type="text"
+            class="form-control"
+            id="postal_code"
+            aria-describedby="postal_codeHelp"
+            name="Postal_code"
+            value="{{applicant.postal_code}}"
+            placeholder="Postal Code"
+          />
+        </div>
+      </div>
+      <!-- end input item  -->
+    </div>
+
+    {% if update == 'active'%}
+    <center>
+      <button
+        type="submit"
+        name="update_application"
+        style="width: 70%"
+        class="btn btn-style my-4 py-2"
+      >
+        Update Application
+      </button>
+    </center>
+    {% else %}
+    <center>
+      <button
+        type="submit"
+        name="create_application"
+        style="width: 70%"
+        class="btn btn-style my-4 py-2"
+      >
+        Create Application
+      </button>
+    </center>
+    {% endif %}
+  </form>
+</div>
+
+<div class="bottom-space"></div>
+{% endblock %}

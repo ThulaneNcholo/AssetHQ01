@@ -1,0 +1,60 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% block content %}
+
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #775de2;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+  }
+
+  .users-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .users-card i {
+    font-size: 30px;
+  }
+
+  .user-icon {
+    background-color: var(--primary-color);
+  }
+
+  .users-card p {
+    font-size: 15px;
+  }
+</style>
+
+<div class="row">
+  <div class="col">
+    <div class="users-card p-3">
+      <center>
+        <i class="bi bi-people-fill"></i>
+        <p>All Users</p>
+        <button class="btn btn-style">view</button>
+      </center>
+    </div>
+  </div>
+  <!-- end user item  -->
+  <div class="col">
+    <div class="users-card p-3">
+      <center>
+        <i class="bi bi-people-fill"></i>
+        <p>Managers</p>
+        <a href="{% url 'managers' %}">
+          <button class="btn btn-style">view</button>
+        </a>
+      </center>
+    </div>
+  </div>
+  <!-- end user item  -->
+  <div class="col">Owners</div>
+  <div class="col">Vendors</div>
+  <div class="col">Applicants</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,114 @@
+<button
+  class="btn btn-style"
+  type="button"
+  data-bs-toggle="offcanvas"
+  data-bs-target="#edittenant{{data.id}}"
+  aria-controls="edittenant"
+>
+  edit
+</button>
+
+<div
+  class="offcanvas offcanvas-start"
+  tabindex="-1"
+  id="edittenant{{data.id}}"
+  aria-labelledby="edittenantLabel"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="edittenantLabel"></h5>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="tenant-hero p-3 mb-5">
+      <center>
+        <h6 class="text-white">
+          {{data.applicant.first_name}} {{data.applicant.last_name}}
+        </h6>
+      </center>
+    </div>
+
+    <form method="POST">
+      {% csrf_token %}
+      <div class="row mb-5">
+        <div class="col">
+          <div class="dates-card p-2">
+            <center>
+              <p class="mb-0 mb-2">move in</p>
+              <p class="mb-0">{{data.move_in}}</p>
+            </center>
+          </div>
+        </div>
+        <div class="col">
+          <div class="dates-card p-2">
+            <center>
+              <p class="mb-0 mb-2">move out</p>
+              <p class="mb-0">{{data.move_in}}</p>
+            </center>
+          </div>
+        </div>
+      </div>
+      <div class="mb-4">
+        <label for="moveinDate" class="form-label">New Move in Date</label>
+        <input
+          type="date"
+          class="form-control"
+          id="moveinDate"
+          aria-describedby="firstHelp"
+          name="moveIn"
+          placeholder="move in"
+        />
+      </div>
+      <div class="mb-4">
+        <label for="moveoutDate" class="form-label">New Move out date</label>
+        <input
+          type="date"
+          class="form-control"
+          id="moveoutDate"
+          aria-describedby="firstHelp"
+          name="moveOut"
+          placeholder="move out"
+        />
+      </div>
+      <div class="mb-4">
+        <label for="price" class="form-label">Price</label>
+        <input
+          type="text"
+          class="form-control"
+          id="price"
+          aria-describedby="firstHelp"
+          name="price"
+          value="{{data.fee}}"
+          placeholder="R8 000"
+        />
+      </div>
+      <div class="mb-4">
+        <label for="agreement" class="form-label">Payment Agreement</label>
+        <input
+          type="text"
+          class="form-control"
+          id="agreement"
+          aria-describedby="firstHelp"
+          name="agreement"
+          value="{{data.paydate}}"
+          placeholder="7th day of the month"
+        />
+      </div>
+      <input type="text" value="{{data.id}}" name="applicantID" hidden="true" />
+      <center>
+        <button
+          type="submit"
+          name="edit_tenant"
+          class="btn btn-style mt-4"
+          style="width: 50%"
+        >
+          submit
+        </button>
+      </center>
+    </form>
+  </div>
+</div>

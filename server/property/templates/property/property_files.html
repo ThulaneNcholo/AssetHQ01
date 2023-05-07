@@ -1,0 +1,40 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #775de2;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+
+  .file-icon {
+    font-size: 30px;
+  }
+
+  .btn-margin-space {
+    margin-right: 15px;
+  }
+
+  .file-container {
+    height: 300px;
+  }
+
+  .more-link {
+    color: var(--primary-color);
+  }
+</style>
+
+<!-- ======= Property Hero Component  ======= -->
+{% include 'partials/actions.html' %}
+
+<!-- ======== Files list start ========= -->
+{% include 'partials/property_files_list.html' %}
+
+<div class="bottom-space"></div>
+{% endblock %}

@@ -1,0 +1,196 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #775de2;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+
+  .service-icon {
+    color: var(--primary-color);
+    margin-right: 20px;
+  }
+
+  .vendor-form {
+    max-width: 1000px;
+  }
+</style>
+<h1>Add Vendor</h1>
+
+<div class="d-flex justify-content-center">
+  <div class="main-container border p-3 vendor-form mt-5">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <!-- ======= General Information  ======= -->
+      <h5 class="mb-4">General Information</h5>
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Company Name"
+              name="compnay_name"
+            />
+            <label for="floatingInput">Company Name</label>
+          </div>
+        </div>
+        <!-- end input item  -->
+        <div class="col-12 col-md-6">
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder="First Name"
+              name="first_name"
+            />
+            <label for="floatingInput">First Name</label>
+          </div>
+        </div>
+        <!-- end input item  -->
+        <div class="col-12 col-md-6">
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Last Name"
+              name="last_name"
+            />
+            <label for="floatingInput">Last Name</label>
+          </div>
+        </div>
+        <!-- end input item  -->
+        <div class="col-12 col-md-6">
+          <div class="form-floating mb-3">
+            <input
+              type="email"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Email"
+              name="email"
+            />
+            <label for="floatingInput">Email</label>
+          </div>
+        </div>
+        <!-- end input item  -->
+        <div class="col-12 col-md-6">
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Phone"
+              name="phone"
+            />
+            <label for="floatingInput">Phone</label>
+          </div>
+        </div>
+        <!-- end input item  -->
+      </div>
+      <!-- ======= Vendor Address  ======= -->
+      <h5 class="mb-4 mt-5">Vendor Adress</h5>
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Street Address"
+              name="Street"
+            />
+            <label for="floatingInput">Street Address</label>
+          </div>
+        </div>
+        <!-- end input item  -->
+        <div class="col-12 col-md-6">
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Town"
+              name="town"
+            />
+            <label for="floatingInput">Town</label>
+          </div>
+        </div>
+        <!-- end input item  -->
+        <div class="col-12 col-md-6">
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder="City"
+              name="City"
+            />
+            <label for="floatingInput">City</label>
+          </div>
+        </div>
+        <!-- end input item  -->
+        <div class="col-12 col-md-6">
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Province"
+              name="Province"
+            />
+            <label for="floatingInput">Province</label>
+          </div>
+        </div>
+        <!-- end input item  -->
+        <div class="col-12 col-md-6">
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Postal Code"
+              name="postal_code"
+            />
+            <label for="floatingInput">Postal Code</label>
+          </div>
+        </div>
+        <!-- end input item  -->
+      </div>
+      <!-- ======= Vendor Logo  ======= -->
+      <h5 class="mb-4 mt-5">Vendor Logo | Cover Image</h5>
+      <div>
+        <div class="input-group mb-3">
+          <input
+            name="coverImage"
+            type="file"
+            class="form-control"
+            id="inputGroupFile02"
+          />
+        </div>
+      </div>
+      <center>
+        <button
+          type="submit"
+          name="add_vendor"
+          class="btn btn-style py-3 my-4"
+          style="width: 60%"
+        >
+          save vendor
+        </button>
+      </center>
+    </form>
+  </div>
+</div>
+
+<div class="bottom-space"></div>
+{% endblock %}

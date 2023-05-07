@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+
+    <!-- Bootstrap Icons  -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
+    />
+
+    <!-- Poppins Fonts  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- inter Fonts  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- htmx-cnd -->
+    <script
+      src="https://unpkg.com/htmx.org@1.8.0"
+      integrity="sha384-cZuAZ+ZbwkNRnrKi05G/fjBX+azI9DNOkNYysZ0I/X5ZFgsmMiBXgDZof30F5ofc"
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+      /* Colors */
+      :root {
+        --primary-color: #775de2;
+        --background-color: #e4eaff;
+        --secondary-color: #4a4685;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f5f5f7;
+        /* font-family: "Inter", sans-serif;  */
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      p {
+        font-size: 14px;
+        /* color: #212529; */
+        color: black;
+      }
+
+      .back-btn {
+        font-size: 25px;
+        color: var(--primary-color);
+      }
+
+      .back-btn-bg {
+        background-color: transparent;
+        padding: 0px;
+      }
+
+      /* Styles for the sidebar */
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px;
+        height: 100%;
+        background-color: white;
+        overflow-y: auto;
+      }
+
+      .sidebar-icon-container {
+        background-color: var(--primary-color);
+        color: black;
+        font-size: 20px;
+        margin-right: 10px;
+        border-top-right-radius: 70px;
+        border-bottom-left-radius: 10px;
+      }
+
+      .sidebar p {
+        margin-bottom: 0px;
+      }
+
+      .sidebar-hover:hover {
+        background-color: var(--primary-color);
+        border-radius: 5px;
+        color: white !important;
+      }
+
+      /* Body styles  */
+      .btn-style {
+        background-color: var(--primary-color);
+        color: white;
+        font-size: 14px;
+      }
+
+      .secondary-btn {
+        background-color: #ebedfe;
+        border: 1px solid;
+        border-color: var(--background-color);
+      }
+
+      .options-btn {
+        background-color: var(--secondary-color);
+        color: white;
+      }
+
+      .bottom-space {
+        height: 150px;
+      }
+
+      /* Styles for the main content */
+      .main-content {
+        margin-left: 250px; /* Same as the width of the sidebar */
+        height: 100%;
+      }
+
+      .fixed-margin {
+        margin-left: 250px; /* Same as the width of the sidebar */
+      }
+
+      .main-container {
+        background-color: white;
+        border-radius: 10px;
+      }
+
+      /* sidebar offcanvas link style  */
+      .offcanvas-links {
+        background-color: var(--primary-color);
+        border-radius: 10px;
+        color: white;
+      }
+
+      /* Tables style start  */
+      .heading-color {
+        color: #9b9dad;
+      }
+
+      .line-deco {
+        background-color: lightgrey;
+      }
+
+      .list-card p {
+        margin-bottom: 0px;
+      }
+
+      .list-card:hover {
+        background-color: #775de2;
+        border-radius: 10px;
+      }
+
+      .avatar {
+        vertical-align: middle;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        background-color: lightgray;
+        margin-right: 10px;
+      }
+
+      .circle-avatar {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: var(--background-color);
+        /* background-color: #ccc;  */
+        text-align: center;
+        font-size: 24px;
+        color: var(--primary-color);
+        /* color: #fff;  */
+        font-weight: bold;
+        margin-right: 10px;
+      }
+
+      .circle-avatar span {
+        display: block;
+      }
+
+      .profile-avatar {
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: var(--background-color);
+        /* background-color: #ccc; */
+        text-align: center;
+        font-size: 70px;
+        color: var(--primary-color);
+        /* color: #fff;  */
+        font-weight: bold;
+        margin-right: 10px;
+      }
+
+      .profile-avatar span {
+        display: block;
+      }
+
+      .view-icon {
+        color: var(--primary-color);
+        margin-left: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 10px;
+        background-color: var(--background-color);
+      }
+
+      .search-container {
+        background-color: white;
+        border-radius: 10px;
+        margin-right: 10px;
+        border-color: white;
+      }
+
+      .search-input {
+        border: none;
+      }
+
+      .btn-margin {
+        margin-left: 10px;
+      }
+
+      /* Form style start  */
+      .form-control {
+        background-color: var(--secondary-background);
+        border-color: var(--secondary-background);
+      }
+
+      .heading-style {
+        color: var(--secondary-color);
+      }
+
+      .readonly-input {
+        background-color: var(--background-color) !important;
+      }
+
+      /* Chebox style  */
+      .checkbox-style {
+        background-color: var(--background-color);
+        height: 30px;
+        width: 30px;
+        margin-right: 30px;
+      }
+
+      /* scroll buttons  */
+      .button-container {
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+      }
+
+      .bottom-nav {
+        display: none;
+        height: 80px;
+        padding-bottom: 100px;
+        background-color: white;
+        border-radius: 10px;
+      }
+
+      .bottom-nav-card {
+        background-color: var(--primary-color);
+        color: white !important;
+        border-radius: 10px;
+      }
+
+      .bottom-nav-card p {
+        font-size: 12px;
+        color: white;
+      }
+
+      @media screen and (max-width: 575.98px) {
+        .main-content {
+          margin-left: 0px; /* Same as the width of the sidebar */
+          height: 100%;
+        }
+
+        .fixed-margin {
+          margin-left: 0px; /* Same as the width of the sidebar */
+        }
+
+        .container-padding {
+          margin-bottom: 48px;
+        }
+
+        .hide-component {
+          display: none;
+        }
+
+        .bottom-nav {
+          display: block;
+        }
+      }
+    </style>
+
+    <title>AssetHQ</title>
+  </head>
+  <body>
+    <!-- ======= Sidebar ======= -->
+    {% include 'partials/sidebar.html' %}
+
+    <!-- ======= Main Content ======= -->
+    <div class="main-content mt-3">
+      <div class="container">{% block content %} {% endblock %}</div>
+    </div>
+
+    <!-- ======= Bottom navbar ======= -->
+    {% include 'partials/bottom_navbar.html' %}
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

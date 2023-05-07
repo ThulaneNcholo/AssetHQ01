@@ -1,0 +1,401 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% block content %}
+
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #775de2;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+
+  .hero-card {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+  }
+
+  .dashboard-cards {
+    height: 500px;
+    max-height: 500px;
+  }
+
+  .btn-fonts {
+    font-size: 14px;
+    width: 100px;
+  }
+
+  /* Task Styling  */
+  .dashboard-task-icon {
+    font-size: 16px;
+    color: var(--primary-color);
+  }
+
+  /* Viewings style  */
+  .property_dashboard_image {
+    height: 90px;
+    width: 90px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 30px;
+  }
+
+  /* Financials  */
+  .financials-icon {
+    color: var(--primary-color);
+    background-color: var(--background-color);
+    border: 1px solid;
+    padding: 10px;
+    border-radius: 10px;
+    border-color: var(--primary-color);
+    margin-right: 20px;
+  }
+
+  /* Charts  */
+  .chart-container {
+    width: 300px;
+    height: 300px;
+    position: relative;
+  }
+
+  .chart {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+    transform-origin: center;
+    border-radius: 50%;
+  }
+
+  .slice {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    clip: rect(0, 150px, 300px, 0);
+    border-radius: 50%;
+  }
+
+  .one {
+    background-color: #ff4d4d;
+    transform: rotate(60deg);
+  }
+
+  .two {
+    background-color: #4d94ff;
+    transform: rotate(180deg);
+  }
+
+  .three {
+    background-color: #4dff4d;
+    transform: rotate(300deg);
+  }
+
+  .hero-icons-styles {
+    color: var(--primary-color);
+    font-size: 30px;
+  }
+
+  .circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: var(--background-color);
+    border-radius: 50%;
+    margin-right: 20px;
+    /* box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); */
+  }
+
+  .link-hover:hover {
+    background-color: var(--background-color);
+  }
+
+  .schedule-icon {
+    font-size: 60px;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+  }
+</style>
+
+<!-- hero component start  -->
+<div class="hero-card py-5 px-3 d-flex justify-content-between mb-5">
+  <div>
+    <h4 class="text-white">AssetHQ</h4>
+    <h3 class="text-white">Welcome back, <span class="fw-bold">Jamal</span></h3>
+    <!-- <h1>{{ request.user.username }}</h1>  -->
+    <h6 class="text-white">Manage your properties</h6>
+  </div>
+  <div>
+    {% if user.is_authenticated %}
+    <a href="{% url 'register' %}">
+      <button class="btn btn-light">Login</button>
+    </a>
+    {% else %}
+    <a href="{% url 'logout' %}">
+      <button class="btn btn-light">Logout</button>
+    </a>
+    {% endif %}
+  </div>
+</div>
+
+<div class="row mb-5">
+  <div class="col-12 col-md-6 col-lg-3 mb-3">
+    <div class="main-container p-3 border">
+      <p class="text-secondary">Vacant Properties</p>
+      <div class="d-flex" style="align-items: baseline">
+        <div class="circle">
+          <i class="bi bi-house-exclamation-fill hero-icons-styles"></i>
+        </div>
+        <h3 class="mb-0">12</h3>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-6 col-lg-3 mb-3">
+    <div class="main-container p-3 border">
+      <p class="text-secondary">Occupied Properties</p>
+      <div class="d-flex" style="align-items: baseline">
+        <div class="circle">
+          <i class="bi bi-house-check-fill hero-icons-styles"></i>
+        </div>
+        <h3 class="mb-0">120</h3>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-6 col-lg-3 mb-3">
+    <div class="main-container p-3 border">
+      <p class="text-secondary">Net Profit</p>
+      <div class="d-flex" style="align-items: baseline">
+        <div class="circle">
+          <i
+            class="bi bi-arrow-down-circle-fill text-success hero-icons-styles"
+          ></i>
+        </div>
+        <h3 class="mb-0">R{{Total_Income}}</h3>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-6 col-lg-3 mb-3">
+    <div class="main-container p-3 border">
+      <p class="text-secondary">Total Expenses</p>
+      <div class="d-flex" style="align-items: baseline">
+        <div class="circle">
+          <i
+            class="bi bi-arrow-up-circle-fill text-danger hero-icons-styles"
+          ></i>
+        </div>
+        <h3 class="mb-0">R{{All_Expenses}}</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Dashboard Cards  -->
+<div class="row">
+  <!-- ======= Pending Request ======= -->
+  <div class="col-12 col-md-12 col-lg-4 mb-5">
+    <div class="main-container border p-3 dashboard-cards">
+      <h6 class="mb-4">Maintenance Requests</h6>
+      {% for data in maintenance_request %}
+      <a href="{% url 'request-details' data.id %}">
+        <div class="row link-hover">
+          <div class="col">
+            <p class="mb-0">{{data.title}}</p>
+            <p class="text-secondary">{{data.property.propertyName}}</p>
+          </div>
+          <div class="col">
+            {% if data.priority.name == 'High' %}
+            <button class="btn btn-danger rounded-pill btn-fonts">
+              {{data.priority.name}}
+            </button>
+            {% elif data.priority.name == 'Medium' %}
+            <button class="btn btn-warning rounded-pill btn-fonts">
+              {{data.priority.name}}
+            </button>
+            {% elif data.priority.name == 'Low' %}
+            <button class="btn btn-style rounded-pill btn-fonts">
+              {{data.priority.name}}
+            </button>
+            {% endif %}
+          </div>
+        </div>
+      </a>
+      <hr class="mt-0" />
+      {% endfor %}
+    </div>
+  </div>
+  <!-- ======= Open Tasks ======= -->
+  <div class="col-12 col-md-12 col-lg-4 mb-5">
+    <div class="main-container border p-3 dashboard-cards">
+      <h6 class="mb-4">Tasks</h6>
+      {% for data in open_task %}
+      <a href="{% url 'view-task' data.id %}">
+        <div class="row link-hover">
+          <div class="col-1">
+            <i class="bi bi-check-circle-fill dashboard-task-icon"></i>
+          </div>
+          <div class="col">
+            <p>{{data.title}}</p>
+          </div>
+          <div class="col">
+            <p>{{data.due_date}}</p>
+          </div>
+        </div>
+      </a>
+      <hr class="mt-0" />
+      {% endfor %}
+    </div>
+  </div>
+  <!-- ======= Viewings Appointments ======= -->
+  <div class="col-12 col-md-12 col-lg-4 mb-5">
+    <div class="main-container border p-3 dashboard-cards">
+      <div class="d-flex justify-content-between" style="align-items: baseline">
+        <h6 class="mb-4">Showings</h6>
+        {% include 'partials/client_select_property.html' %}
+      </div>
+
+      {% for data in propertyShowings %}
+      <a href="{% url 'property-viewings' data.property.id %}">
+        <div class="d-flex mb-3 link-hover">
+          <img
+            src="{{data.property.coverImage.url}}"
+            alt=""
+            class="property_dashboard_image"
+          />
+          <div>
+            <p class="mb-0">{{data.client}}</p>
+            <p class="mb-0">{{data.viewing_date}}</p>
+            <p>{{data.viewing_time}}</p>
+          </div>
+        </div>
+      </a>
+      {% empty %}
+      <div>
+        <center>
+          <i class="bi bi-house-dash-fill schedule-icon"></i>
+          <h6 class="text-secondary">No Viewings Scheduled</h6>
+        </center>
+      </div>
+      {% endfor %}
+      <!-- divider  -->
+      {% if view_more == 'True' %}
+      <center>
+        <button
+          class="btn btn-style rounded-pill mt-3"
+          style="width: 80%"
+          data-bs-target="#selectPropertyDashboard"
+          data-bs-toggle="modal"
+        >
+          view all
+        </button>
+      </center>
+      {% endif %}
+    </div>
+  </div>
+  <!-- ======= Applicantions ======= -->
+  <div class="col-12 col-md-12 col-lg-4 mb-5">
+    <div class="main-container border p-3 dashboard-cards">
+      <h6 class="mb-4">Incomeplete Applicantions</h6>
+      <!-- start  -->
+      <div class="list-group">
+        {% for data in applications %}
+        <a
+          href="{% url 'application-details' data.id %}"
+          class="list-group-item list-group-item-action d-flex gap-3 py-3"
+          aria-current="true"
+        >
+          {% if data.profile_pic %}
+          <img
+            src="{{data.profile_pic.url}}"
+            alt="twbs"
+            width="40"
+            height="40"
+            class="rounded-circle flex-shrink-0 border"
+            style="object-fit: cover"
+          />
+          {% endif %}
+          <div class="d-flex gap-2 w-100 justify-content-between">
+            <div>
+              <h6 class="mb-0">{{data.first_name}} {{data.last_name}}</h6>
+              <p class="mb-0 opacity-75">#{{data.application_number}}</p>
+            </div>
+            <small class="opacity-50 text-nowrap">{{data.date_created}}</small>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+      <!-- end  -->
+    </div>
+  </div>
+  <!-- ======= Unpaid Invoices ======= -->
+  <div class="col-12 col-md-12 col-lg-4 mb-5">
+    <div class="main-container border p-3 dashboard-cards">
+      <h6 class="mb-4">Pending Invoices</h6>
+      <div class="d-flex mb-4">
+        <i class="bi bi-calculator-fill financials-icon"></i>
+        <div style="margin-right: 60px">
+          <p class="mb-0">#34764764</p>
+          <p class="mb-0">Vendor Payment</p>
+        </div>
+        <p class="fw-bold">R2 500</p>
+      </div>
+      <!-- end item  -->
+      <div class="d-flex mb-4">
+        <i class="bi bi-calculator-fill financials-icon"></i>
+        <div style="margin-right: 60px">
+          <p class="mb-0">#34764764</p>
+          <p class="mb-0">Vendor Payment</p>
+        </div>
+        <p class="fw-bold">R2 500</p>
+      </div>
+      <!-- end item  -->
+      <div class="d-flex mb-4">
+        <i class="bi bi-calculator-fill financials-icon"></i>
+        <div style="margin-right: 60px">
+          <p class="mb-0">#34764764</p>
+          <p class="mb-0">Vendor Payment</p>
+        </div>
+        <p class="fw-bold">R2 500</p>
+      </div>
+      <!-- end item  -->
+    </div>
+  </div>
+  <!-- ======= UnPaid Rent ======= -->
+  <div class="col-12 col-md-12 col-lg-4 mb-5">
+    <div class="main-container border p-3 dashboard-cards">
+      <h6 class="mb-4">Pending Rent</h6>
+      <!-- start  -->
+      <div class="list-group">
+        {% for data in applications %}
+        <a
+          href="{% url 'application-details' data.id %}"
+          class="list-group-item list-group-item-action d-flex gap-3 py-3"
+          aria-current="true"
+        >
+          {% if data.profile_pic %}
+          <img
+            src="{{data.profile_pic.url}}"
+            alt="twbs"
+            width="40"
+            height="40"
+            class="rounded-circle flex-shrink-0 border"
+            style="object-fit: cover"
+          />
+          {% endif %}
+          <div class="d-flex gap-2 w-100 justify-content-between">
+            <div>
+              <h6 class="mb-0">{{data.first_name}} {{data.last_name}}</h6>
+              <p class="mb-0 opacity-75">#{{data.application_number}}</p>
+            </div>
+            <small class="opacity-50 text-nowrap">R4 400</small>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+      <!-- end  -->
+    </div>
+  </div>
+</div>
+
+<div style="height: 200px; width: 200px"></div>
+{% endblock %}

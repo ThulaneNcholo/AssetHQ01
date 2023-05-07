@@ -1,0 +1,38 @@
+<div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+  {% for data in properties_files %}
+  <div class="feature col">
+    <div class="main-container p-3 file-container border" id="file-ID">
+      <div class="feature-icon mb-2">
+        <i class="bi bi-folder-fill text-warning file-icon"></i>
+      </div>
+      <h5>{{data.name}}</h5>
+
+      {% if data.description|wordcount > 23 %}
+      <p>
+        {{data.description|truncatewords:23 }}
+        <span class="mx-2"
+          ><a class="more-link" href="#" onclick="readMore(event)">read more</a>
+        </span>
+      </p>
+      {% else %}
+      <p>{{data.description}}</p>
+      {% endif %}
+
+      <p>Property : {{data.property.propertyName}}</p>
+      <div class="d-flex">
+        <a href="{{ data.file.url }}">
+          <button class="btn btn-style btn-margin-space">Download</button>
+        </a>
+        <button class="btn btn-style">Delete</button>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <div class="feature col-12 border">
+    <center>
+      <i class="bi bi-folder file-empty-icon"></i>
+      <h6>There are currently no files available.</h6>
+    </center>
+  </div>
+  {% endfor %}
+</div>

@@ -1,0 +1,58 @@
+<button class="border-0 back-btn-bg mb-3" onclick="history.back()">
+  <i class="bi bi-arrow-left-square-fill back-btn"></i>
+</button>
+
+<!-- ======= Messages Notification  ======= -->
+<div>
+  {% for message in messages %}
+  <div class="alert alert-primary my-5" role="alert">{{message}}</div>
+  {% endfor %}
+</div>
+
+<h4>{{property.propertyName}} Property</h4>
+
+<!-- ======= hero Actions ======= -->
+<i class="bi bi-arrow-right d-flex justify-content-end mb-3"></i>
+
+<div class="button-container pb-4 mb-3">
+  <a href="{% url 'propert-details' property.id %}">
+    <button class="btn btn-style">Property Details</button>
+  </a>
+  <a href="{% url 'applicationsProperty' property.id %}">
+    <button class="btn btn-style">Applications</button>
+  </a>
+  <a href="{% url 'property-tasks' property.id %}">
+    <button class="btn btn-style">
+      Tasks <span class="badge bg-danger mx-1">{{open_task_count}}</span>
+    </button>
+  </a>
+  <a href="{% url 'property-inspections' property.id %}">
+    <button class="btn btn-style">Inspections</button>
+  </a>
+  <a href="{% url 'property-files' property.id %}">
+    <button class="btn btn-style">Files</button>
+  </a>
+  <a href="{% url 'property-requests' property.id %}">
+    <button class="btn btn-style">
+      Requests <span class="badge bg-danger mx-1">{{maintenance_count}}</span>
+    </button>
+  </a>
+  <a href="{% url 'financials' property.id %}">
+    <button class="btn btn-style">Financials</button>
+  </a>
+  <a href="{% url 'property-viewings' property.id %}">
+    <button class="btn btn-style">Viewings</button>
+  </a>
+  <button class="btn btn-style">Options</button>
+  <button class="btn secondary-btn">Delete Property</button>
+</div>
+
+<script>
+  // Hide the message after 3 seconds (3000 milliseconds)
+  setTimeout(function () {
+    const messageDivs = document.querySelectorAll(".alert");
+    messageDivs.forEach(function (div) {
+      div.style.display = "none";
+    });
+  }, 2000);
+</script>

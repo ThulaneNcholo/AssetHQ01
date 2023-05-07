@@ -1,0 +1,89 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #775de2;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+
+  .inspection-image {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 30px;
+  }
+
+  .headings-card-style {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    color: white;
+  }
+
+  .headings-card-style i {
+    font-size: 21px;
+  }
+
+  .hover-task:hover {
+    background-color: lightgray;
+  }
+
+  .task-property-image {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+  }
+
+  .property-task-card {
+    border-radius: 10px;
+    background-color: var(--background-color);
+  }
+
+  .task_managers-images {
+    vertical-align: middle;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: -10px;
+    border: 1px solid white;
+  }
+
+  .task-icons {
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+
+  .task-icon-headings {
+    color: var(--primary-color);
+    margin-right: 10px;
+  }
+</style>
+
+<h3>Thulane, today you have</h3>
+<h4 class="fw-bold">6 tasks</h4>
+<div class="d-flex justify-content-end mt-5">
+  <!-- ======= Select Property Modal ======= -->
+  {% include 'partials/add_task_Property_model.html' %}
+  <button class="btn btn-style mx-1">
+    <i class="bi bi-filter-circle-fill"></i> sort by
+  </button>
+  <button class="btn btn-style mx-1">
+    <i class="bi bi-funnel-fill"></i> filter
+  </button>
+</div>
+
+<!-- ======= List Task Partial ======= -->
+{% include 'partials/list_task_partial.html' %}
+
+<div class="bottom-space"></div>
+{% endblock %}

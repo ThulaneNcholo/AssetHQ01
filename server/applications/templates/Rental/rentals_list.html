@@ -1,0 +1,76 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #775de2;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+</style>
+
+<!-- ======= Messages Notification  ======= -->
+<div>
+  {% for message in messages %}
+  <div class="alert alert-primary my-5" role="alert">{{message}}</div>
+  {% endfor %}
+</div>
+
+<!-- ======= Table start  ======= -->
+<div class="main-container border p-3 mt-5">
+  <h4>Rental Applications</h4>
+
+  <!-- ======= table headings ======= -->
+  <div class="row mt-5 heading-color">
+    <div class="col">Full Names</div>
+    <div class="col d-none d-lg-block">ID</div>
+    <div class="col d-none d-lg-block">Applicant</div>
+    <div class="col d-none d-lg-block">Date</div>
+  </div>
+  <hr class="mb-4" />
+
+  <!-- ======= List managers rows ======= -->
+  {% for data in rentals %}
+  <a href="{% url 'application-details' data.id %}">
+    <div class="row list-card py-1">
+      <div class="col">
+        <div class="d-flex">
+          {% if data.profile_pic %}
+          <img src="{{data.profile_pic.url}}" alt="" class="avatar" />
+          {% else %}
+          <div class="circle-avatar">
+            <span>{{data.first_name|slice:"1"}}</span>
+          </div>
+          {% endif %}
+          <p class="d-flex align-items-center">
+            {{data.first_name}} {{data.last_name}}
+          </p>
+        </div>
+      </div>
+      <div class="col d-none d-lg-block d-flex align-items-center">
+        <p class="">#{{data.application_number}}</p>
+      </div>
+      <div class="col d-none d-lg-block d-flex align-items-center">
+        <button class="btn btn-style rounded-pill">
+          <p class="text-white">{{data.role}}</p>
+        </button>
+      </div>
+      <div class="col d-none d-lg-block d-flex align-items-center">
+        <div class="d-flex">
+          <p>{{data.date_created}}</p>
+          <i class="bi bi-eye-fill view-icon"></i>
+        </div>
+      </div>
+    </div>
+  </a>
+  <hr class="line-deco" />
+  {% endfor %}
+</div>
+
+<div class="bottom-space"></div>
+{% endblock %}

@@ -1,0 +1,45 @@
+
+
+
+<div class="row">
+  {% for data in maintenance_requests %}
+  <div class="col-12 col-md-6 col-lg-4 mb-3">
+    <div class="main-container p-3 border maintenance-card">
+      <div class="d-flex justify-content-between mb-3">
+        <h5>{{data.title}}</h5>
+        {% if data.priority.name == 'High'%}
+        <i class="bi bi-pie-chart-fill text-danger"></i>
+        {% elif data.priority.name == 'Medium' %}
+        <i class="bi bi-pie-chart-fill text-warning"></i>
+        {% elif data.priority.name == 'Low' %}
+        <i class="bi bi-pie-chart-fill" style="color: #775de2"></i>
+        {% endif %}
+      </div>
+
+      <div class="row mb-3">
+        <div class="col">
+          <h6>{{data.priority.name}}</h6>
+          <p class="text-secondary">priority</p>
+        </div>
+        <div class="col">
+          <h6>{{data.status.name}}</h6>
+          <p class="text-secondary">status</p>
+        </div>
+      </div>
+
+      <p class="text-secondary mb-2">Description</p>
+      <p>{{data.description|truncatewords:10}}</p>
+
+      <div class="d-flex justify-content-end">
+        <p>{{data.date_created}}</p>
+      </div>
+
+      <a href="{% url 'request-details' data.id %}">
+        <button class="btn btn-style my-4" style="width: 100%">
+          view request
+        </button>
+      </a>
+    </div>
+  </div>
+  {% endfor %}
+</div>

@@ -1,0 +1,102 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #775de2;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+
+  .inspection-image {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 30px;
+  }
+
+  .maintenance-card {
+    height: 350px;
+    max-height: 350px;
+  }
+
+  .outline-btns {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+  }
+
+  /* scroll effect start  */
+  .button-container {
+    width: 100%;
+    overflow: auto;
+    white-space: nowrap;
+  }
+
+  .btn-group {
+    display: inline-block;
+  }
+
+  .btn {
+    margin-right: 5px;
+    margin-bottom: 5px;
+  }
+</style>
+
+<div class="d-flex justify-content-between">
+  <h3>Maintenance Requests</h3>
+
+  <!-- select property partial modal  -->
+  {% include 'partials/properties_request_modal.html' %}
+</div>
+
+<!-- ======= Maintenance Status Filter ======= -->
+<i class="bi bi-arrow-right d-flex justify-content-end mb-3 mt-5"></i>
+<div class="button-container">
+  <div class="btn-group" role="group" aria-label="Basic outlined example">
+    <button type="button" class="btn btn-style" style="font-size: 16px">
+      Pending
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-primary outline-btns"
+      style="font-size: 16px"
+    >
+      In Progress
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-primary outline-btns"
+      style="font-size: 16px"
+    >
+      Completed
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-primary outline-btns"
+      style="font-size: 16px"
+    >
+      All
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-primary outline-btns"
+      style="font-size: 16px"
+    >
+      Cancelled
+    </button>
+  </div>
+</div>
+
+<!-- List all Maintenance Request Partial  -->
+<div class="mt-5">
+  {% include 'partials/maintenance_request_partial.html' %}
+</div>
+
+<div class="bottom-space"></div>
+{% endblock %}

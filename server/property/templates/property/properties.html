@@ -1,0 +1,68 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #775de2;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+
+  .property-cover-img {
+    height: 200px;
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  .property-card {
+    background-color: white;
+    border-radius: 10px;
+  }
+
+  .property-card:hover {
+    background-color: lightgray;
+  }
+
+  .type-style {
+    border-radius: 20px;
+    font-size: 14px;
+  }
+</style>
+
+<h4>All Properties</h4>
+
+<div class="row">
+  {% for data in properties %}
+  <!-- ======= Property Card  ======= -->
+
+  <div class="col-12 col-md-6 col-lg-4 mb-4">
+    <a href="{% url 'propert-details' data.id %}">
+      <div class="property-card border p-3">
+        <img src="{{data.coverImage.url}}" alt="" class="property-cover-img" />
+        <div class="row mt-4 text-black">
+          <div class="col">
+            <h6>{{data.propertyName}}</h6>
+          </div>
+          <div class="col d-flex justify-content-end">
+            <h6>R48637</h6>
+          </div>
+        </div>
+        <p class="text-secondary">
+          {{data.street}} {{data.town}} {{data.city}}
+        </p>
+        <button class="btn btn-dark type-style">{{data.property_for}}</button>
+      </div>
+    </a>
+  </div>
+  <!-- end item  -->
+  {% endfor %}
+</div>
+
+<div class="bottom-space"></div>
+{% endblock %}

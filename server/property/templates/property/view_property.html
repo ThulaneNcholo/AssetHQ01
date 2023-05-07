@@ -1,0 +1,159 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #775de2;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+
+  .cover-image {
+    height: 400px;
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  .secondary-images {
+    height: 200px;
+    width: 200px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-left: 7px;
+  }
+
+  .secondaryInfo-card {
+    background-color: var(--background-color);
+    border-radius: 10px;
+  }
+
+  .secondaryInfo-card h6 {
+    margin-bottom: 0px;
+  }
+
+  /* secondary section start  */
+  .sectionTwo-component {
+    height: 300px;
+    max-height: 400px;
+    overflow: auto;
+  }
+
+  /* Style the scrollbar */
+  .sectionTwo-component::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  .sectionTwo-component::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
+
+  .sectionTwo-component::-webkit-scrollbar-thumb {
+    background-color: lightgray;
+    border-radius: 3px;
+  }
+
+  .sectionTwo-component::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  }
+
+  .card-scroll {
+    height: 100%;
+  }
+
+  /* End Style the scrollbar */
+
+  .secondary-components-headings {
+    font-size: 16px;
+  }
+
+  .type-style {
+    border-radius: 20px;
+    font-size: 14px;
+  }
+
+  /* Managers styling  */
+
+  .secondary-manager-images {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: lightgray;
+    margin-right: 10px;
+    border: 2px solid;
+    border-color: var(--primary-color);
+  }
+
+  .secondary-card-style {
+    background-color: var(--background-color);
+    border-radius: 10px;
+  }
+
+  /* features style  */
+  .styled-checkbox {
+    background-color: var(--background-color);
+    border-radius: 10px;
+  }
+
+  .checkbox-styling {
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+  }
+
+  .image-overflow {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  /* Content 2 CSS  */
+</style>
+
+<!-- ======= Messages Notification  ======= -->
+<div>
+  {% for message in messages %}
+  <div class="alert alert-primary my-5" role="alert">{{message}}</div>
+  {% endfor %}
+</div>
+
+<h4>{{property.propertyName}} Property</h4>
+
+<!-- ======= hero Actions ======= -->
+<i class="bi bi-arrow-right d-flex justify-content-end mb-3"></i>
+
+<div
+  id="tabs"
+  hx-target="#tab-contents"
+  _="on htmx:afterOnLoad take .selected for event.target"
+>
+  <div class="button-container pb-4 mb-3">
+    <a hx-get="{% url 'content1' property.id %}" class="selected">
+      <button class="btn btn-style">Property</button>
+    </a>
+    <a hx-get="{% url 'content2' property.id %}">
+      <button class="btn btn-style">Applications</button>
+    </a>
+    <button class="btn btn-style">Accounts</button>
+    <button class="btn btn-style">Files</button>
+    <button class="btn btn-style">Tasks</button>
+    <button class="btn btn-style">Reports</button>
+    <button class="btn btn-style">Options</button>
+    <button class="btn secondary-btn">Delete Property</button>
+  </div>
+</div>
+
+
+<div
+  id="tab-contents"
+  hx-get="{% url 'content1' property.id %}"
+  hx-trigger="load"
+></div>
+
+<div class="bottom-space"></div>
+{% endblock %}

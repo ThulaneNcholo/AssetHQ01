@@ -1,0 +1,135 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #775de2;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+
+  .lease-container {
+    width: 720px;
+  }
+</style>
+
+<h3>Add to Inspection</h3>
+
+<div class="mt-5 d-flex justify-content-center">
+  <div class="main-container border p-3 lease-container">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="form-floating mb-4">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Room"
+              name="room"
+            />
+            <label for="floatingInput">Room</label>
+          </div>
+        </div>
+        <!-- end input item  -->
+        <div class="col-12 col-md-6">
+          <div class="form-floating mb-4">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Item Name"
+              name="item_name"
+            />
+            <label for="floatingInput">Item Name</label>
+          </div>
+        </div>
+        <!-- end input item  -->
+      </div>
+      <div class="mb-4">
+        <div class="form-floating">
+          <textarea
+            class="form-control"
+            placeholder="Leave a comment here"
+            id="floatingTextarea2"
+            style="height: 200px"
+            name="item_description"
+          ></textarea>
+          <label for="floatingTextarea2">Item Description</label>
+        </div>
+      </div>
+      <!-- end input item  -->
+      <div class="mb-4">
+        <div class="form-floating">
+          <textarea
+            class="form-control"
+            placeholder="Leave a comment here"
+            id="floatingTextarea2"
+            style="height: 200px"
+            name="Comments"
+          ></textarea>
+          <label for="floatingTextarea2">Comments</label>
+        </div>
+      </div>
+      <!-- end input item  -->
+
+      <!-- ========= images =========== -->
+      <h6>Images</h6>
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="input-group mb-4">
+            <input
+              name="image1"
+              type="file"
+              class="form-control"
+              id="inputGroupFile02"
+            />
+          </div>
+        </div>
+        <!-- end input item  -->
+        <div class="col-12 col-md-6">
+          <div class="input-group mb-4">
+            <input
+              name="image2"
+              type="file"
+              class="form-control"
+              id="inputGroupFile02"
+            />
+          </div>
+        </div>
+        <!-- end input item  -->
+        <div class="col-12 col-md-6">
+          <div class="input-group mb-4">
+            <input
+              name="image3"
+              type="file"
+              class="form-control"
+              id="inputGroupFile02"
+            />
+          </div>
+        </div>
+        <!-- end input item  -->
+      </div>
+
+      <center>
+        <button
+          type="submit"
+          name="add_inspection"
+          class="btn btn-style my-4 py-3"
+          style="width: 70%; font-size: 16px"
+        >
+          add inspection
+        </button>
+      </center>
+    </form>
+  </div>
+</div>
+
+<div class="bottom-space"></div>
+{% endblock %}

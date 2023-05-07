@@ -1,0 +1,208 @@
+<!-- ============= list all Tasks ========================================= -->
+<div class="row mt-5">
+  <!-- ======= Open Tasks ======= -->
+  <div class="col-12 col-lg-4 mb-5">
+    <div class="p-3 headings-card-style mb-4">
+      <div class="row">
+        <div class="col d-flex justify-content-start">
+          <h5>Open</h5>
+        </div>
+        <div class="col d-flex justify-content-end">
+          <i class="bi bi-three-dots-vertical"></i>
+        </div>
+      </div>
+    </div>
+    <!-- end heading  -->
+
+    <!-- ======= Data start ======= -->
+    {% for data in open_tasks %}
+    <a href="{% url 'view-task' data.id %}">
+      <div class="main-container px-3 py-5 hover-task mb-4 border">
+        <div class="row mb-4 text-black">
+          <div class="col d-flex justify-content-start">
+            <h6>
+              <i class="bi bi-check-circle-fill task-icon-headings"></i>
+              {{data.title}}
+            </h6>
+          </div>
+          <div class="col-2 d-flex justify-content-end">
+            <i class="bi bi-pencil-square"></i>
+          </div>
+        </div>
+        <p class="text-secondary mb-4">{{data.description}}</p>
+
+        <p class="mb-1 text-secondary">Due Date</p>
+        <p class="mb-4" style="font-size: 16px">{{data.due_date}}</p>
+
+        <!-- Managers list  -->
+        <p class="mb-1 text-secondary">Shared Managers</p>
+        <div class="d-flex mb-5">
+          {% for manager in data.managers.all %}
+          <img
+            src="{{manager.profile_pic.url}}"
+            alt=""
+            class="task_managers-images"
+          />
+          {% endfor %}
+        </div>
+
+        <!-- Property  -->
+        <div class="d-flex p-2 property-task-card">
+          <img
+            src="{{data.property.coverImage.url}}"
+            alt=""
+            class="task-property-image"
+          />
+          <div>
+            <p class="mb-0">{{data.property.propertyName}}</p>
+            <p class="mb-0 text-secondary">#{{data.property.listing_number}}</p>
+          </div>
+        </div>
+      </div>
+    </a>
+    {% empty %}
+    <div class="main-container p-3 border">
+      <center>
+        <i class="bi bi-list-check task-icons"></i>
+        <p>No Tasks</p>
+      </center>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- ======= In Progress Tasks ======= -->
+  <div class="col-12 col-lg-4 mb-5">
+    <div class="p-3 headings-card-style mb-4">
+      <div class="row">
+        <div class="col d-flex justify-content-start">
+          <h5>In Progress</h5>
+        </div>
+        <div class="col d-flex justify-content-end">
+          <i class="bi bi-three-dots-vertical"></i>
+        </div>
+      </div>
+    </div>
+    <!-- end heading  -->
+
+    <!-- ======= Data start ======= -->
+    {% for data in progress_tasks %}
+    <a href="{% url 'view-task' data.id %}">
+      <div class="main-container px-3 py-5 hover-task mb-4 border">
+        <div class="row mb-4 text-black">
+          <div class="col d-flex justify-content-start">
+            <i class="bi bi-check-circle-fill task-icon-headings"></i>
+            <h6>{{data.title}}</h6>
+          </div>
+          <div class="col-2 d-flex justify-content-end">
+            <i class="bi bi-pencil-square"></i>
+          </div>
+        </div>
+        <p class="text-secondary mb-4">{{data.description}}</p>
+
+        <p class="mb-1 text-secondary">Due Date</p>
+        <p class="mb-4" style="font-size: 16px">{{data.due_date}}</p>
+
+        <!-- Managers list  -->
+        <p class="mb-1 text-secondary">Shared Managers</p>
+        <div class="d-flex mb-5">
+          {% for manager in data.managers.all %}
+          <img
+            src="{{manager.profile_pic.url}}"
+            alt=""
+            class="task_managers-images"
+          />
+          {% endfor %}
+        </div>
+
+        <!-- Property  -->
+        <div class="d-flex p-2 property-task-card">
+          <img
+            src="{{data.property.coverImage.url}}"
+            alt=""
+            class="task-property-image"
+          />
+          <div>
+            <p class="mb-0">{{data.property.propertyName}}</p>
+            <p class="mb-0 text-secondary">#{{data.property.listing_number}}</p>
+          </div>
+        </div>
+      </div>
+    </a>
+    {% empty %}
+    <div class="main-container p-3 border">
+      <center>
+        <i class="bi bi-list-check task-icons"></i>
+        <p>No Tasks</p>
+      </center>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- ======= Complete Tasks ======= -->
+  <div class="col-12 col-lg-4 mb-5">
+    <div class="p-3 headings-card-style mb-4">
+      <div class="row">
+        <div class="col d-flex justify-content-start">
+          <h5>Complete</h5>
+        </div>
+        <div class="col d-flex justify-content-end">
+          <i class="bi bi-three-dots-vertical"></i>
+        </div>
+      </div>
+    </div>
+    <!-- end heading  -->
+
+    <!-- ======= Data start ======= -->
+    {% for data in complete_tasks %}
+    <a href="{% url 'view-task' data.id %}">
+      <div class="main-container px-3 py-5 hover-task mb-4 border">
+        <div class="row mb-4 text-black">
+          <div class="col d-flex justify-content-start">
+            <i class="bi bi-check-circle-fill task-icon-headings"></i>
+            <h6>{{data.title}}</h6>
+          </div>
+          <div class="col-2 d-flex justify-content-end">
+            <i class="bi bi-pencil-square"></i>
+          </div>
+        </div>
+        <p class="text-secondary mb-4">{{data.description}}</p>
+
+        <p class="mb-1 text-secondary">Due Date</p>
+        <p class="mb-4" style="font-size: 16px">{{data.due_date}}</p>
+
+        <!-- Managers list  -->
+        <p class="mb-1 text-secondary">Shared Managers</p>
+        <div class="d-flex mb-5">
+          {% for manager in data.managers.all %}
+          <img
+            src="{{manager.profile_pic.url}}"
+            alt=""
+            class="task_managers-images"
+          />
+          {% endfor %}
+        </div>
+
+        <!-- Property  -->
+        <div class="d-flex p-2 property-task-card">
+          <img
+            src="{{data.property.coverImage.url}}"
+            alt=""
+            class="task-property-image"
+          />
+          <div>
+            <p class="mb-0">{{data.property.propertyName}}</p>
+            <p class="mb-0 text-secondary">#{{data.property.listing_number}}</p>
+          </div>
+        </div>
+      </div>
+    </a>
+    {% empty %}
+    <div class="main-container p-3 border">
+      <center>
+        <i class="bi bi-list-check task-icons"></i>
+        <p>No Tasks</p>
+      </center>
+    </div>
+    {% endfor %}
+  </div>
+</div>
