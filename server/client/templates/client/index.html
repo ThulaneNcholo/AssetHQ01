@@ -122,18 +122,18 @@
 <div class="hero-card py-5 px-3 d-flex justify-content-between mb-5">
   <div>
     <h4 class="text-white">AssetHQ</h4>
-    <h3 class="text-white">Welcome back, <span class="fw-bold">Jamal</span></h3>
+    <h3 class="text-white">Welcome back</h3>
     <!-- <h1>{{ request.user.username }}</h1>  -->
     <h6 class="text-white">Manage your properties</h6>
   </div>
   <div>
     {% if user.is_authenticated %}
-    <a href="{% url 'register' %}">
-      <button class="btn btn-light">Login</button>
+    <a href="{% url 'logout' %}">
+      <button class="btn btn-light">logout</button>
     </a>
     {% else %}
-    <a href="{% url 'logout' %}">
-      <button class="btn btn-light">Logout</button>
+    <a href="{% url 'login' %}">
+      <button class="btn btn-light">login</button>
     </a>
     {% endif %}
   </div>

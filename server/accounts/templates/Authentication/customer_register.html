@@ -17,12 +17,19 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
     />
 
-    <title>EMMAH APRIL</title>
+    <title>AssetsHQ Register</title>
   </head>
 
   <style>
     :root {
       --main-color: black;
+      --primary-color: #775de2;
+      --background-color: #e4eaff;
+      --secondary-color: #4a4685;
+    }
+
+    body {
+      background-color: var(--primary-color);
     }
 
     .login-hero-register {
@@ -52,91 +59,112 @@
     .form-style {
       border-color: black !important;
     }
+
+    /* new styling start  */
+    .main_container {
+      width: 100%;
+      max-width: 700px;
+    }
+
+    .app_name {
+      color: var(--background-color);
+    }
+
+    .btn_login {
+      width: 80%;
+      background-color: var(--background-color);
+    }
+
+    .form-label {
+      color: var(--background-color);
+    }
   </style>
   <body>
-    <section class="container" style="padding-top: 88px">
-      <div class="d-flex justify-content-start">
-        <button onclick="history.back()" class="back-button">
-          <i class="bi bi-arrow-left" style="font-size: 20px"></i>
-        </button>
+    <!-- ======= Start Register Page ======= -->
+    <section class="d-flex justify-content-center">
+      <div class="container main_container mt-5">
+        <div class="d-flex justify-content-start">
+          <button onclick="history.back()" class="back-button">
+            <i class="bi bi-arrow-left" style="font-size: 20px"></i>
+          </button>
+        </div>
+
+        <center>
+          <h1 class="app_name">AssetsHQ</h1>
+          <h3 class="app_name">Register</h3>
+        </center>
+
+        {% if form.errors %}
+        <section class="my-3">
+          <div class="alert alert-warning" role="alert">{{form.errors}}</div>
+        </section>
+        {% endif %}
+
+        <form method="POST" autocomplete="off">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="Username" class="form-label">Username</label>
+            <div>{{form.username}}</div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"
+              >Email address</label
+            >
+            <div>{{form.email}}</div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label"
+              >Password</label
+            >
+            <div>{{form.password1}}</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label"
+              >Password confirmation</label
+            >
+            <div>{{form.password2}}</div>
+          </div>
+          <div class="d-flex justify-content-end mb-3">
+            <p
+              class="mb-0"
+              onclick="registerPassword1(event);password2register(event)"
+            >
+              SHOW-PASSWORD
+            </p>
+          </div>
+
+          <center>
+            <button
+              class="btn btn_login rounded-pill btn-light py-3 fw-bold my-5"
+              type="submit"
+              name="create-customer"
+            >
+              Register
+            </button>
+          </center>
+
+          <center>
+            <p class="text-light">
+              Already have an account?
+              <strong
+                ><a
+                  href="{% url 'login' %}"
+                  style="text-decoration: none; color: black"
+                  >Log in</a
+                ></strong
+              >
+            </p>
+          </center>
+
+          <section class="mt-5">{{form.errors}}</section>
+        </form>
       </div>
     </section>
+    <!-- ======= End Register Page ======= -->
 
-    <section class="mt-5">
-      <center>
-        <p class="login-hero-register mb-1">EMMAH APRIL</p>
-        <p>FASHION HOUSE</p>
-        <p>REGISTER</p>
-      </center>
-    </section>
+    <!-- <section class="container" style="padding-top: 88px"></section> -->
 
-    {% if form.errors %}
-    <section class="container my-3">
-      <div class="alert alert-primary" role="alert">{{form.errors}}</div>
-    </section>
-    {% endif %}
-
-    <div class="container mt-5">
-      <form method="POST" action="" autocomplete="off">
-        {% csrf_token %}
-        <div class="mb-3">
-          <label for="Username" class="form-label">Username</label>
-          <div>{{form.username}}</div>
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label"
-            >Email address</label
-          >
-          <div>{{form.email}}</div>
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <div>{{form.password1}}</div>
-        </div>
-
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label"
-            >Password confirmation</label
-          >
-          <div>{{form.password2}}</div>
-        </div>
-        <div class="d-flex justify-content-end mb-3">
-          <p
-            class="mb-0"
-            onclick="registerPassword1(event);password2register(event)"
-          >
-            SHOW-PASSWORD
-          </p>
-        </div>
-        <center>
-          <button
-            type="submit"
-            name="create-customer"
-            class="btn text-white mb-4 mt-3 py-3 fw-bold rounded-0"
-            style="background-color: black; width: 100%"
-          >
-            Register
-          </button>
-        </center>
-      </form>
-
-      <section class="mt-2">
-        <center>
-          <p class="text-secondary">
-            Already have an account?
-            <strong
-              ><a
-                href="{% url 'login' %}"
-                style="text-decoration: none; color: black"
-                >Log in</a
-              ></strong
-            >
-          </p>
-        </center>
-      </section>
-
-      <section class="mt-5">{{form.errors}}</section>
-    </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
 

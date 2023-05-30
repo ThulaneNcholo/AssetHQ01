@@ -1,17 +1,23 @@
 <div class="fixed-bottom bottom-nav">
   <div class="d-flex justify-content-between bottom-nav-card m-2 py-2 px-3">
-    <div>
-      <center>
-        <i class="bi bi-grid-1x2-fill"></i>
-        <p class="mb-0 bot">Dashboard</p>
-      </center>
-    </div>
-    <div>
-      <center>
-        <i class="bi bi-houses-fill"></i>
-        <p class="mb-0">Properties</p>
-      </center>
-    </div>
+    <a href="{% url 'index' %}">
+      <div>
+        <center>
+          <i class="bi bi-grid-1x2-fill text-white"></i>
+          <p class="mb-0 bot">Dashboard</p>
+        </center>
+      </div>
+    </a>
+
+    <a href="{% url 'properties' %}">
+      <div>
+        <center>
+          <i class="bi bi-houses-fill text-white"></i>
+          <p class="mb-0">Properties</p>
+        </center>
+      </div>
+    </a>
+
     <a
       data-bs-toggle="offcanvas"
       href="#offcanvasExample"
